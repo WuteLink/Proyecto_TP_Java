@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        String msj = "prueba git";
+
         String txtSubMenu;
         Scanner lector = new Scanner(System.in);
         OpcionPrincipal opcionPrincipal;
