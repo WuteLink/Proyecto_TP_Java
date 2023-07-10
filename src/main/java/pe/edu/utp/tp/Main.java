@@ -8,6 +8,18 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        String Archivocsv = "\\C:\\Users\\USUARIO\\Documents\\College\\3er ciclo\\Taller de programación\\Proyecto docs\\Proyecto TALLER\\Proyecto_TP_Java\\archivo.csv\\";
+        String csvSeparador = ",";
+        //String rutaArchivo = AnalizadorDatos.class.getResource(Archivocsv).getPath();
+        AnalizadorDatos analizador = new AnalizadorDatos(Archivocsv,csvSeparador);
+
+        analizador.analizarDatosSismicos();
+        analizador.generarTablaEventosPorAño();
+
+        int añoDeseado = 2022;
+        analizador.generarTablaEventosPorMes(añoDeseado);
+
+
         String msj = "prueba git";
         //Prueba de modificación
 
@@ -84,6 +96,8 @@ public class Main {
                     System.out.println("Opción ingresada no es válida");
             }
         }
+
+
 
 /*
         String linea;
