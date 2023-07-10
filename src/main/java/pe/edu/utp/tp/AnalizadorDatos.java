@@ -12,7 +12,7 @@ public class AnalizadorDatos {
     private String Archivocsv;
     private String csvSeparador;
     private Map<Integer,Integer> eventosPorAnio;
-    private Map<Integer ,Integer> eventosPorMes;
+    private Map<String ,Integer> eventosPorMes;
 
     public AnalizadorDatos(String Archivocsv, String csvSeparador){
         this.Archivocsv=Archivocsv;
@@ -68,8 +68,8 @@ public class AnalizadorDatos {
                 //Eventos por año
                 eventosPorAnio.put(año,eventosPorAnio.getOrDefault(año,0)+1);
                 //Eventos por mes
-
-                eventosPorMes.put(año,eventosPorMes.getOrDefault(año,0)+1);
+                String anioMes = año+ "-"+ mes;
+                eventosPorMes.put(anioMes,eventosPorMes.getOrDefault(anioMes,0)+1);
 
             }
 

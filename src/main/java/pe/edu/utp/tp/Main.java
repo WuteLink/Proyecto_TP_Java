@@ -16,7 +16,7 @@ public class Main {
         analizador.analizarDatosSismicos();
         analizador.generarTablaEventosPorAño();
 
-        int añoDeseado = 2022;
+        int añoDeseado = 2021;
         analizador.generarTablaEventosPorMes(añoDeseado);
 
 
