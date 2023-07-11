@@ -14,10 +14,10 @@ public class Main {
         AnalizadorDatos analizador = new AnalizadorDatos(Archivocsv,csvSeparador);
 
         analizador.analizarDatosSismicos();
-        analizador.generarTablaEventosPorAño();
+        analizador.generarTablaEventosPorAnio();
 
-        int añoDeseado = 2021;
-        analizador.generarTablaEventosPorMes(añoDeseado);
+        int anioDeseado = 2021;
+        analizador.generarTablaEventosPorMes(anioDeseado);
 
 
         String msj = "prueba git";
@@ -27,7 +27,7 @@ public class Main {
         Scanner lector = new Scanner(System.in);
         OpcionPrincipal opcionPrincipal;
         OpcionSecundario opcionSecundario;
-        boolean salirMenuPrincipal = false;
+        boolean salirMenuPrincipal = true, salirMenuSecundario = true;
         String opcPrincipal = """
                 --------------------------------------------------------
                 MENU PRINCIPAL
@@ -50,56 +50,102 @@ public class Main {
                 Ingrese opción [1-2]
                 """;
 
-        System.out.println(opcPrincipal);
-
-        opcionPrincipal = OpcionPrincipal.values()[lector.nextByte()];
-
         while (salirMenuPrincipal){
+            System.out.println(opcPrincipal);
+            opcionPrincipal = OpcionPrincipal.values()[lector.nextByte()];
             switch (opcionPrincipal){
                 case FIN_DE_PROGRAMA:
-                    salirMenuPrincipal = true;
+                    salirMenuPrincipal = false;
                     break;
                 case RANGO_DE_ANIOS:
-                    txtSubMenu = "MÓDULO 01 – EVENTOS POR RANGO DE AÑOS";
-                    System.out.printf(opcSecundario, txtSubMenu);
-                    opcionSecundario = OpcionSecundario.values()[lector.nextByte()];
-                    switch (opcionSecundario){
-                        case MENU_PRINCIPAL:
-                            salirMenuPrincipal = false;
-                            break;
-                        case IMPRIMIR_PANTALLA:
-                            salirMenuPrincipal = false;
-                            break;
-                        case EXPORTAR_ARCHIVO:
+                    while (salirMenuSecundario){
+                        txtSubMenu = "MÓDULO 01 – EVENTOS POR RANGO DE AÑOS";
+                        System.out.printf(opcSecundario, txtSubMenu);
+                        opcionSecundario = OpcionSecundario.values()[lector.nextByte()];
+                        switch (opcionSecundario){
+                            case MENU_PRINCIPAL:
+                                salirMenuSecundario = false;
+                                break;
+                            case IMPRIMIR_PANTALLA:
 
-                            break;
+                                break;
+                            case EXPORTAR_ARCHIVO:
+
+                                break;
+                            default:
+                                System.out.println("Opción inválida");
+                        }
                     }
                     break;
                 case MES_POR_ANIO:
-                    txtSubMenu = "MÓDULO 02 – EVENTOS POR MES DADO UN AÑO";
-                    System.out.printf(opcSecundario,txtSubMenu);
-                    opcionSecundario = OpcionSecundario.values()[lector.nextByte()];
+                    while (salirMenuSecundario){
+                        txtSubMenu = "MÓDULO 02 – EVENTOS POR MES DADO UN AÑO";
+                        System.out.printf(opcSecundario,txtSubMenu);
+                        opcionSecundario = OpcionSecundario.values()[lector.nextByte()];
+                        switch (opcionSecundario){
+                            case MENU_PRINCIPAL:
+                                salirMenuSecundario = false;
+                                break;
+                            case IMPRIMIR_PANTALLA:
+
+                                break;
+                            case EXPORTAR_ARCHIVO:
+
+                                break;
+                            default:
+                                System.out.println("Opción inválida");
+                        }
+                    }
                     break;
                 case MES_POR_RANGO_MAGNITUDES_Y_ANIO:
+                    while (salirMenuSecundario){
+                        txtSubMenu = "MÓDULO 03 – EVENTOS POR MES DADOS UN RANGO DE MAGNITUDES Y UN AÑO";
+                        System.out.printf(opcSecundario,txtSubMenu);
+                        opcionSecundario = OpcionSecundario.values()[lector.nextByte()];
+                        switch (opcionSecundario){
+                            case MENU_PRINCIPAL:
+                                salirMenuSecundario = false;
+                                break;
+                            case IMPRIMIR_PANTALLA:
 
-                    txtSubMenu = "MÓDULO 03 – EVENTOS POR MES DADOS UN RANGO DE MAGNITUDES Y UN AÑO";
-                    System.out.printf(opcSecundario,txtSubMenu);
-                    opcionSecundario = OpcionSecundario.values()[lector.nextByte()];
+                                break;
+                            case EXPORTAR_ARCHIVO:
+
+                                break;
+                            default:
+                                System.out.println("Opción inválida");
+                        }
+                    }
                     break;
                 case HORA_POR_ANIO:
+                    while (salirMenuSecundario){
+                        txtSubMenu = "MÓDULO 04 – EVENTOS POR MES DADO UN AÑO";
+                        System.out.printf(opcSecundario,txtSubMenu);
+                        opcionSecundario = OpcionSecundario.values()[lector.nextByte()];
+                        switch (opcionSecundario){
+                            case MENU_PRINCIPAL:
+                                salirMenuSecundario = false;
+                                break;
+                            case IMPRIMIR_PANTALLA:
 
-                    txtSubMenu = "MÓDULO 04 – EVENTOS POR MES DADO UN AÑO";
-                    System.out.printf(opcSecundario,txtSubMenu);
-                    opcionSecundario = OpcionSecundario.values()[lector.nextByte()];
+                                break;
+                            case EXPORTAR_ARCHIVO:
+
+                                break;
+                            default:
+                                System.out.println("Opción inválida");
+                        }
+                    }
                     break;
                 default:
                     System.out.println("Opción ingresada no es válida");
             }
         }
 
+        GestorDatos gestordatos = new GestorDatos("C:\\Users\\Alvar\\Documents\\Catálogo Sísmico Perú 1960-2021 (DATASET).csv");
+        gestordatos.leerArchivo();
 
-
-/*
+        /*
         String linea;
         try {
             BufferedReader archivo = new BufferedReader(new FileReader("C:\\Users\\Alvar\\Documents\\Catálogo Sísmico Perú 1960-2021 (DATASET).csv"));
@@ -114,6 +160,5 @@ public class Main {
             System.out.println("No hay lineas para leer");
         }
         */
-
     }
 }

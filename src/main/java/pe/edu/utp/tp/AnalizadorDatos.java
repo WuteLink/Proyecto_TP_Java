@@ -19,12 +19,11 @@ public class AnalizadorDatos {
         this.csvSeparador= csvSeparador;
         this.eventosPorAnio= new HashMap<>();
         this.eventosPorMes = new HashMap<>();
-
     }
 
     //Sacar año
 
-    private int obtenerAño(String fecha){
+    private int obtenerAnio(String fecha){
         SimpleDateFormat formato= new SimpleDateFormat("yyyyMMdd");
         try {
             Calendar calendario = Calendar.getInstance();
@@ -62,37 +61,35 @@ public class AnalizadorDatos {
                 String[] data = linea.split(csvSeparador);
                 //Sacar el año y mes de la fecha
                 String fecha = data[1];
-                int año= obtenerAño(fecha);
+                int anio= obtenerAnio(fecha);
                 String mes = obtenerMes(fecha);
 
                 //Eventos por año
-                eventosPorAnio.put(año,eventosPorAnio.getOrDefault(año,0)+1);
+                eventosPorAnio.put(anio,eventosPorAnio.getOrDefault(anio,0)+1);
                 //Eventos por mes
-                String anioMes = año+ "-"+ mes;
+                String anioMes = anio+ "-"+ mes;
                 eventosPorMes.put(anioMes,eventosPorMes.getOrDefault(anioMes,0)+1);
-
             }
-
         }catch (IOException e){
             e.printStackTrace();
         }
     }
-    public void generarTablaEventosPorAño(){
+    public void generarTablaEventosPorAnio(){
         System.out.println("TABLA DE EVENTOS SISMICOS POR AÑO: ");
         System.out.println("AÑO/T/EVENTOS");
         for (Map.Entry<Integer,Integer> entry : eventosPorAnio.entrySet()){
-            int año = entry.getKey();
+            int anio = entry.getKey();
             int eventos = entry.getValue();
-            System.out.println(año+ "\t\t" + eventos);
+            System.out.println(anio+ "\t\t" + eventos);
         }
         System.out.println();
     }
-    public void generarTablaEventosPorMes(int añoDeseado) {
-        System.out.println("Tabla de eventos sísmicos por mes en el año " + añoDeseado + ":");
+    public void generarTablaEventosPorMes(int anioDeseado) {
+        System.out.println("Tabla de eventos sísmicos por mes en el año " + anioDeseado + ":");
         System.out.println("Mes\t\tEventos");
         for (int i = 1; i <= 12; i++) {
-            String añoMes = añoDeseado + "-" + String.format("%02d", i);
-            int eventos = eventosPorMes.getOrDefault(añoMes, 0);
+            String anioMes = anioDeseado + "-" + String.format("%02d", i);
+            int eventos = eventosPorMes.getOrDefault(anioMes, 0);
             System.out.println(i + "\t\t" + eventos);
         }
     }
