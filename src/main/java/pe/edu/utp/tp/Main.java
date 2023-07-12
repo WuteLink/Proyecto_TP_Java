@@ -8,19 +8,20 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
+        /*
         String Archivocsv = "\\C:\\Users\\USUARIO\\Documents\\College\\3er ciclo\\Taller de programación\\Proyecto docs\\Proyecto TALLER\\Proyecto_TP_Java\\archivo.csv\\";
         String csvSeparador = ",";
-        //String rutaArchivo = AnalizadorDatos.class.getResource(Archivocsv).getPath();
         AnalizadorDatos analizador = new AnalizadorDatos(Archivocsv,csvSeparador);
 
         analizador.analizarDatosSismicos();
         analizador.generarTablaEventosPorAnio();
 
         int anioDeseado = 2021;
-        analizador.generarTablaEventosPorMes(anioDeseado);
+        analizador.generarTablaEventosPorMes(anioDeseado);*/
 
 
-        String msj = "prueba git";
+
         //Prueba de modificación
 
         //Definiendo variables
@@ -145,7 +146,7 @@ public class Main {
         }
 
         //Haciendo prueba para enviar el archivo csv a un arreglo
-        GestorDatos gestordatos = new GestorDatos("C:\\Users\\Alvar\\Documents\\Catálogo Sísmico Perú 1960-2021 (DATASET).csv");
+        GestorDatos gestordatos = new GestorDatos("archivo.csv"); //La ruta debe ser relativa porque la ubicación cambia
         System.out.println(gestordatos.getDatos().length); //Muestra cantidad total de datos en las celdas
         System.out.println(gestordatos.getDatos()[2]); //Muestra la celda 3 del arreglo
 

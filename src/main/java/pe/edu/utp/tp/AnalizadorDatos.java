@@ -8,6 +8,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+@Deprecated
+//Por el momento ya que se está utilizando arrays
+
 public class AnalizadorDatos {
     private String Archivocsv;
     private String csvSeparador;

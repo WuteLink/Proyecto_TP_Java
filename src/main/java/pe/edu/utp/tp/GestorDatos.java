@@ -7,11 +7,14 @@ import java.io.IOException;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GestorDatos {
     private String archivo;
     private Sismo datos[];
     private  int numeroLinea;
+
 
     public GestorDatos(String archivo){
         this.archivo = archivo;
