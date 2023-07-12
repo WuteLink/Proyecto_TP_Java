@@ -4,54 +4,83 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class GestorDatos {
     private String archivo;
-    private String[][] matrizDatos;
+    private Sismo datos[];
+    private  int numeroLinea;
 
-    public GestorDatos(String archivo) {
+    public GestorDatos(String archivo){
         this.archivo = archivo;
+        datos = new Sismo[indiceDatosSismo()];
+        leerArchivo();
     }
 
     public String getArchivo() {
         return archivo;
     }
 
-    public void setArchivo(String archivo) {
-        this.archivo = archivo;
+    public Sismo[] getDatos() {
+        return datos;
     }
 
-    public String[][] getMatrizDatos() {
-        return matrizDatos;
-    }
-
-    public void setMatrizDatos(String[][] matrizDatos) {
-        this.matrizDatos = matrizDatos;
-    }
-
+    //Funcion para leer archivo csv y guardar los datos en un arreglo y mostrar su contenido
     public void leerArchivo(){
         try {
+            int indice = 0, contador = 0;
             String linea;
-            int numeroLinea = 0;
             BufferedReader archivo = new BufferedReader(new FileReader(getArchivo()));
             linea = archivo.readLine();
             while (linea != null){
-                String[] arregloLinea = linea.split(",");
-                for (int i=0; i<arregloLinea.length; i++){
-                    matrizDatos[numeroLinea][i] = arregloLinea[i]; //Me aparece que matrizDatos es null
+                if (contador > 0){
+                    String[] arregloLinea = linea.split(",");
+                    Sismo nuevoSismo = new Sismo();
+                    nuevoSismo.setId(Integer.parseInt(arregloLinea[0]));
+                    nuevoSismo.setFecha_utc(new SimpleDateFormat("yyyyMMdd").parse(arregloLinea[1]));
+                    nuevoSismo.setHora_utc(new Time(new SimpleDateFormat("HHmmss").parse(arregloLinea[2]).getTime()));
+                    nuevoSismo.setLatitud(Double.parseDouble(arregloLinea[3]));
+                    nuevoSismo.setLongutid(Double.parseDouble(arregloLinea[4]));
+                    nuevoSismo.setProfundidad(Integer.parseInt(arregloLinea[5]));
+                    nuevoSismo.setMagnitud(Float.parseFloat(arregloLinea[6]));
+                    datos[indice++] = nuevoSismo;
                 }
-                numeroLinea++;
+                contador++;
                 linea = archivo.readLine();
             }
-            for (int fila=0; fila<matrizDatos.length; fila++){
-                for (int j=0; j<matrizDatos[fila].length; j++){
-                    System.out.println(matrizDatos[fila][j] + " ");
+            numeroLinea = indice;
+
+        }catch (FileNotFoundException e){
+            System.out.println("Archivo no encontrado");
+        }catch (IOException e){
+            System.out.println("No hay lineas para leer");
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //Indice para el arreglo de tipo sismo, retorna la cantidad de lineas que tiene el archivo csv
+    public int indiceDatosSismo(){
+        try {
+            int contador = 0;
+            String linea;
+            BufferedReader archivo = new BufferedReader(new FileReader(getArchivo()));
+            linea = archivo.readLine();
+            while (linea != null){
+                if (contador > 0){
+                    String[] arregloLinea = linea.split(",");
                 }
+                contador++;
+                linea = archivo.readLine();
             }
+            numeroLinea = contador-1;
         }catch (FileNotFoundException e){
             System.out.println("Archivo no encontrado");
         }catch (IOException e){
             System.out.println("No hay lineas para leer");
         }
+        return numeroLinea;
     }
 }

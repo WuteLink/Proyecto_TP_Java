@@ -1,15 +1,21 @@
 package pe.edu.utp.tp;
 
+import java.sql.Time;
+import java.util.Date;
+
 public class Sismo {
     private int id;
-    private int fecha_utc;
-    private int hora_utc;
+    private Date fecha_utc;
+    private Time hora_utc;
     private double latitud;
     private double longutid;
     private int profundidad;
     private float magnitud;
 
-    public Sismo(int id, int fecha_utc, int hora_utc, double latitud, double longutid, int profundidad, float magnitud) {
+    public Sismo(){
+    }
+
+    public Sismo(int id, Date fecha_utc, Time hora_utc, double latitud, double longutid, int profundidad, float magnitud) {
         this.id = id;
         this.fecha_utc = fecha_utc;
         this.hora_utc = hora_utc;
@@ -27,19 +33,19 @@ public class Sismo {
         this.id = id;
     }
 
-    public int getFecha_utc() {
+    public Date getFecha_utc() {
         return fecha_utc;
     }
 
-    public void setFecha_utc(int fecha_utc) {
+    public void setFecha_utc(Date fecha_utc) {
         this.fecha_utc = fecha_utc;
     }
 
-    public int getHora_utc() {
+    public Time getHora_utc() {
         return hora_utc;
     }
 
-    public void setHora_utc(int hora_utc) {
+    public void setHora_utc(Time hora_utc) {
         this.hora_utc = hora_utc;
     }
 
@@ -73,5 +79,18 @@ public class Sismo {
 
     public void setMagnitud(float magnitud) {
         this.magnitud = magnitud;
+    }
+
+    @Override
+    public String toString() {
+        return "Sismo{" +
+                "id=" + id +
+                ", fecha_utc=" + fecha_utc +
+                ", hora_utc=" + hora_utc +
+                ", latitud=" + latitud +
+                ", longutid=" + longutid +
+                ", profundidad=" + profundidad +
+                ", magnitud=" + magnitud +
+                '}';
     }
 }

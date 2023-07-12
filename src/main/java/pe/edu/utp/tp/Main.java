@@ -23,6 +23,7 @@ public class Main {
         String msj = "prueba git";
         //Prueba de modificación
 
+        //Definiendo variables
         String txtSubMenu;
         Scanner lector = new Scanner(System.in);
         OpcionPrincipal opcionPrincipal;
@@ -50,6 +51,7 @@ public class Main {
                 Ingrese opción [1-2]
                 """;
 
+        //Generando operación repetitiva con while para el menú principal y los submenús
         while (salirMenuPrincipal){
             System.out.println(opcPrincipal);
             opcionPrincipal = OpcionPrincipal.values()[lector.nextByte()];
@@ -142,8 +144,10 @@ public class Main {
             }
         }
 
+        //Haciendo prueba para enviar el archivo csv a un arreglo
         GestorDatos gestordatos = new GestorDatos("C:\\Users\\Alvar\\Documents\\Catálogo Sísmico Perú 1960-2021 (DATASET).csv");
-        gestordatos.leerArchivo();
+        System.out.println(gestordatos.getDatos().length); //Muestra cantidad total de datos en las celdas
+        System.out.println(gestordatos.getDatos()[2]); //Muestra la celda 3 del arreglo
 
         /*
         String linea;
