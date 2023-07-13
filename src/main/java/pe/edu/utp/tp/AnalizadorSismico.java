@@ -8,6 +8,8 @@ public class AnalizadorSismico {
     private final int AÑO_FINAL = 2021;
     //Funciones para sacar las tablas
 
+
+    //Método para generar tabla de eventos por año
     public void generarTablaEventosPorAño(Sismo[] datos, int añoIni, int añoFin){
         try{
             if (añoIni<AÑO_INICIAL || añoFin > AÑO_FINAL || añoIni > añoFin){
@@ -39,7 +41,7 @@ public class AnalizadorSismico {
             System.out.println("AÑO: "+ año + ": "+ cantidadEventos + " eventos");
         }
     }
-
+    //Método para generar tabla de eventos por mes
     public void generarTablasEventosPorMes(Sismo[] datos, int año){
 
         Map<Integer, Integer> eventosPorMes = new HashMap<>();
@@ -62,5 +64,29 @@ public class AnalizadorSismico {
             System.out.println("Mes: "+ mes + ": "+ cantidadEventos + " eventos");
         }
 
+    }
+    //Método para generar tabla de eventos pro mes dado un rango de magnitudes
+    public void generarTablaEventosPorMesRango(Sismo[] datos, int año, float magIni, float magFin){
+        Map<Integer, Integer> eventosPorMes = new HashMap<>();
+        for (Sismo sismo: datos) {
+            Date fecha= sismo.getFecha_utc();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fecha);
+            int sismoAño = calendar.get(Calendar.YEAR);
+            int sismoMes = calendar.get(Calendar.MONTH)+1;
+            float magnitud = sismo.getMagnitud();
+
+            if (sismoAño == año && magnitud >= magIni && magnitud <= magFin){
+                eventosPorMes.put(sismoMes, eventosPorMes.getOrDefault(sismoMes,0)+1);
+
+            }
+        }
+        //Mostrar tabla
+        System.out.println("Tabla de eventos sísmicos por mes en el año " + año + "Según las magnitudes: " +magIni +" - "+ magFin);
+        for (int i = 1; i <= 12; i++){
+            int cantidadEventos = eventosPorMes.getOrDefault(i,0);
+            System.out.println("Mes " + i + ": "+ cantidadEventos+ " eventos");
+
+        }
     }
 }

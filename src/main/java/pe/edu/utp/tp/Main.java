@@ -33,6 +33,8 @@ public class Main {
         int año= 2010;
         analizador.generarTablasEventosPorMes(datos,año);
 
+        analizador.generarTablaEventosPorMesRango(datos, año, 3, 4.5f);
+
 
         //Prueba de modificación
 
