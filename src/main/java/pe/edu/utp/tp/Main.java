@@ -35,6 +35,7 @@ public class Main {
 
         analizador.generarTablaEventosPorMesRango(datos, año, 3, 4.5f);
 
+        analizador.generarTablaEventosPorHoraenAño(datos, año);
 
         //Prueba de modificación
 

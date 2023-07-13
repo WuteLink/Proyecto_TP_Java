@@ -89,4 +89,27 @@ public class AnalizadorSismico {
 
         }
     }
+
+    public void generarTablaEventosPorHoraenAño(Sismo[] datos, int año){
+        Map<Integer, Integer> eventosPorHora  = new HashMap<>();
+        for (Sismo sismo: datos) {
+            Date fecha= sismo.getFecha_utc();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fecha);
+            int sismoAño = calendar.get(Calendar.YEAR);
+
+            if (sismoAño == año ){
+                int hora= sismo.getHora_utc().toLocalTime().getHour();
+                eventosPorHora.put(hora,eventosPorHora.getOrDefault(hora,0)+1);
+
+            }
+        }
+        //imprimir tabla de eventos por hora
+        System.out.println("TABLA DE EVENTOS POR HORA \n");
+        for (int i = 0; i<24; i++){
+            int cantidadEventos= eventosPorHora.getOrDefault(i,0);
+            System.out.println("Hora "+ i + ":00 - "+ (i+1)+ ":00: "+ cantidadEventos+ " eventos");
+        }
+
+    }
 }
