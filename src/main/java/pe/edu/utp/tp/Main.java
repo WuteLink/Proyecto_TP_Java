@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
+
+
     public static void main(String[] args) {
 
         /*
@@ -20,9 +22,20 @@ public class Main {
         int anioDeseado = 2021;
         analizador.generarTablaEventosPorMes(anioDeseado);*/
 
+        GestorDatos gestordatos = new GestorDatos("\\C:\\Users\\USUARIO\\Documents\\College\\3er ciclo\\Taller de programación\\Proyecto docs\\Proyecto TALLER\\Proyecto_TP_Java\\src\\main\\java\\pe\\edu\\utp\\tp\\archivo.csv\\"); //La ruta debe ser relativa porque la ubicación cambia
+        Sismo[] datos = gestordatos.getDatos();
+
+        //Prueba metodos
+        int añoI= 2000;
+        int añoF= 2010;
+        AnalizadorSismico analizador= new AnalizadorSismico();
+        analizador.generarTablaEventosPorAño(datos,añoI,añoF);
+        int año= 2010;
+        analizador.generarTablasEventosPorMes(datos,año);
 
 
         //Prueba de modificación
+
 
         //Definiendo variables
         String txtSubMenu;
@@ -146,9 +159,9 @@ public class Main {
         }
 
         //Haciendo prueba para enviar el archivo csv a un arreglo
-        GestorDatos gestordatos = new GestorDatos("archivo.csv"); //La ruta debe ser relativa porque la ubicación cambia
         System.out.println(gestordatos.getDatos().length); //Muestra cantidad total de datos en las celdas
         System.out.println(gestordatos.getDatos()[2]); //Muestra la celda 3 del arreglo
+        //Prueba de métodos
 
         /*
         String linea;

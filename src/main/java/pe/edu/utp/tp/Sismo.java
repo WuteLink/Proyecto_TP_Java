@@ -3,6 +3,7 @@ package pe.edu.utp.tp;
 import java.sql.Time;
 import java.util.Date;
 
+
 public class Sismo {
     private int id;
     private Date fecha_utc;
