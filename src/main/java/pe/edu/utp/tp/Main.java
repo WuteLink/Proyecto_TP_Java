@@ -20,7 +20,7 @@ public class Main {
         int anioDeseado = 2021;
         analizador.generarTablaEventosPorMes(anioDeseado);*/
 
-        GestorDatos gestordatos = new GestorDatos("C:\\Users\\Alvar\\Documents\\proyecto-java-git\\Proyecto_TP_Java\\src\\main\\java\\pe\\edu\\utp\\tp\\archivo.csv");
+        GestorDatos gestordatos = new GestorDatos("archivo.csv");
         //GestorDatos gestordatos = new GestorDatos("\\C:\\Users\\USUARIO\\Documents\\College\\3er ciclo\\Taller de programación\\Proyecto docs\\Proyecto TALLER\\Proyecto_TP_Java\\src\\main\\java\\pe\\edu\\utp\\tp\\archivo.csv\\"); //La ruta debe ser relativa porque la ubicación cambia
         Sismo[] datos = gestordatos.getDatos();
 
