@@ -51,7 +51,7 @@ public class Main {
         Scanner lector = new Scanner(System.in);
         OpcionPrincipal opcionPrincipal;
         OpcionSecundario opcionSecundario;
-        boolean salirMenuPrincipal = true, salirMenuSecundario = true, menuSecundario = true;
+        boolean salirMenuPrincipal = true ;
         String opcPrincipal = """
                 --------------------------------------------------------
                 MENU PRINCIPAL
@@ -76,6 +76,7 @@ public class Main {
 
         //Generando operación repetitiva con while para el menú principal y los submenús
         while (salirMenuPrincipal){
+            boolean salirMenuSecundario = true;
             System.out.println(opcPrincipal);
             opcionPrincipal = OpcionPrincipal.values()[lector.nextByte()]; //Marca error en esta linea
             lector.nextLine();
