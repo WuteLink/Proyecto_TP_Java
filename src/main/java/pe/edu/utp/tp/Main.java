@@ -8,9 +8,7 @@ import java.util.Scanner;
 
 public class Main {
 
-
     public static void main(String[] args) {
-
         /*
         String Archivocsv = "\\C:\\Users\\USUARIO\\Documents\\College\\3er ciclo\\Taller de programación\\Proyecto docs\\Proyecto TALLER\\Proyecto_TP_Java\\archivo.csv\\";
         String csvSeparador = ",";
@@ -22,20 +20,21 @@ public class Main {
         int anioDeseado = 2021;
         analizador.generarTablaEventosPorMes(anioDeseado);*/
 
-        GestorDatos gestordatos = new GestorDatos("\\C:\\Users\\USUARIO\\Documents\\College\\3er ciclo\\Taller de programación\\Proyecto docs\\Proyecto TALLER\\Proyecto_TP_Java\\src\\main\\java\\pe\\edu\\utp\\tp\\archivo.csv\\"); //La ruta debe ser relativa porque la ubicación cambia
+        GestorDatos gestordatos = new GestorDatos("C:\\Users\\Alvar\\Documents\\proyecto-java-git\\Proyecto_TP_Java\\src\\main\\java\\pe\\edu\\utp\\tp\\archivo.csv");
+        //GestorDatos gestordatos = new GestorDatos("\\C:\\Users\\USUARIO\\Documents\\College\\3er ciclo\\Taller de programación\\Proyecto docs\\Proyecto TALLER\\Proyecto_TP_Java\\src\\main\\java\\pe\\edu\\utp\\tp\\archivo.csv\\"); //La ruta debe ser relativa porque la ubicación cambia
         Sismo[] datos = gestordatos.getDatos();
 
-        //Prueba metodos
+        /*Prueba metodos
         int añoI= 2000;
         int añoF= 2010;
         AnalizadorSismico analizador= new AnalizadorSismico();
-        analizador.generarTablaEventosPorAño(datos,añoI,añoF);
+        analizador.generarTablaEventosPorAño(datos);//,añoI,añoF);
         int año= 2010;
         analizador.generarTablasEventosPorMes(datos,año);
 
         analizador.generarTablaEventosPorMesRango(datos, año, 3, 4.5f);
 
-        analizador.generarTablaEventosPorHoraenAño(datos, año);
+        analizador.generarTablaEventosPorHoraenAño(datos, año);*/
 
         //Prueba de modificación
 
@@ -45,7 +44,7 @@ public class Main {
         Scanner lector = new Scanner(System.in);
         OpcionPrincipal opcionPrincipal;
         OpcionSecundario opcionSecundario;
-        boolean salirMenuPrincipal = true, salirMenuSecundario = true;
+        boolean salirMenuPrincipal = true, salirMenuSecundario = true, menuSecundario = true;
         String opcPrincipal = """
                 --------------------------------------------------------
                 MENU PRINCIPAL
@@ -73,20 +72,36 @@ public class Main {
             System.out.println(opcPrincipal);
             opcionPrincipal = OpcionPrincipal.values()[lector.nextByte()];
             switch (opcionPrincipal){
+
                 case FIN_DE_PROGRAMA:
                     salirMenuPrincipal = false;
                     break;
+
                 case RANGO_DE_ANIOS:
-                    while (salirMenuSecundario){
+                    //while (salirMenuSecundario){
+                    int anioIni, anioFin;
+                    System.out.println("Ingresar rango de año (límite de años entre 1960 - 2021):");
+                    System.out.println("Rango inicial");
+                    anioIni = lector.nextInt();
+                    lector.nextLine();
+                    System.out.println("Rango final");
+                    anioFin = lector.nextInt();
+                    lector.nextLine();
+
+                    AnalizadorSismico analizadorSismico = new AnalizadorSismico();
+                    analizadorSismico.generarTablaEventosPorAño(datos, anioIni, anioFin);
+
+                    while (salirMenuSecundario) {
                         txtSubMenu = "MÓDULO 01 – EVENTOS POR RANGO DE AÑOS";
                         System.out.printf(opcSecundario, txtSubMenu);
                         opcionSecundario = OpcionSecundario.values()[lector.nextByte()];
+                        lector.nextLine();
                         switch (opcionSecundario){
                             case MENU_PRINCIPAL:
                                 salirMenuSecundario = false;
                                 break;
                             case IMPRIMIR_PANTALLA:
-
+                                analizadorSismico.imprimirPantallaPorAnio(anioIni, anioFin);
                                 break;
                             case EXPORTAR_ARCHIVO:
 
@@ -95,8 +110,18 @@ public class Main {
                                 System.out.println("Opción inválida");
                         }
                     }
+                    //}
                     break;
+
                 case MES_POR_ANIO:
+                    int anio;
+                    System.out.println("Ingresar año dentro del rango (1960 - 2021)");
+                    anio = lector.nextInt();
+                    lector.nextLine();
+
+                    AnalizadorSismico analizadorSismico1 = new AnalizadorSismico();
+                    analizadorSismico1.generarTablasEventosPorMes(datos, anio);
+
                     while (salirMenuSecundario){
                         txtSubMenu = "MÓDULO 02 – EVENTOS POR MES DADO UN AÑO";
                         System.out.printf(opcSecundario,txtSubMenu);
@@ -106,7 +131,7 @@ public class Main {
                                 salirMenuSecundario = false;
                                 break;
                             case IMPRIMIR_PANTALLA:
-
+                                analizadorSismico1.imprimirPantallaPorMes(anio);
                                 break;
                             case EXPORTAR_ARCHIVO:
 
@@ -116,17 +141,33 @@ public class Main {
                         }
                     }
                     break;
+
                 case MES_POR_RANGO_MAGNITUDES_Y_ANIO:
+                    int anioParaMagnitud;
+                    float magnitudInicial, magnitudFinal;
+                    System.out.println("Ingresar año dentro del rango (1960 - 2021)");
+                    anioParaMagnitud = lector.nextInt();
+                    lector.nextLine();
+                    System.out.println("Ingresar Magnitud inicial");
+                    magnitudInicial = lector.nextFloat();
+                    lector.nextLine();
+                    System.out.println("Ingresar Magnitud inicial");
+                    magnitudFinal = lector.nextFloat();
+                    lector.nextLine();
+
+                    AnalizadorSismico analizadorSismico2 = new AnalizadorSismico();
+                    analizadorSismico2.generarTablaEventosPorMesRango(datos, anioParaMagnitud, magnitudInicial, magnitudFinal);
+
                     while (salirMenuSecundario){
                         txtSubMenu = "MÓDULO 03 – EVENTOS POR MES DADOS UN RANGO DE MAGNITUDES Y UN AÑO";
-                        System.out.printf(opcSecundario,txtSubMenu);
+                        System.out.printf(opcSecundario, txtSubMenu);
                         opcionSecundario = OpcionSecundario.values()[lector.nextByte()];
                         switch (opcionSecundario){
                             case MENU_PRINCIPAL:
                                 salirMenuSecundario = false;
                                 break;
                             case IMPRIMIR_PANTALLA:
-
+                                analizadorSismico2.imprimirPantallaPorMesRango(anioParaMagnitud, magnitudInicial, magnitudFinal);
                                 break;
                             case EXPORTAR_ARCHIVO:
 
@@ -136,7 +177,16 @@ public class Main {
                         }
                     }
                     break;
+
                 case HORA_POR_ANIO:
+                    int anioHora;
+                    System.out.println("Ingresar año dentro del rango (1960 - 2021)");
+                    anioHora = lector.nextInt();
+                    lector.nextLine();
+
+                    AnalizadorSismico analizadorSismico3 = new AnalizadorSismico();
+                    analizadorSismico3.generarTablaEventosPorHoraenAnio(datos, anioHora);
+
                     while (salirMenuSecundario){
                         txtSubMenu = "MÓDULO 04 – EVENTOS POR MES DADO UN AÑO";
                         System.out.printf(opcSecundario,txtSubMenu);
@@ -146,7 +196,7 @@ public class Main {
                                 salirMenuSecundario = false;
                                 break;
                             case IMPRIMIR_PANTALLA:
-
+                                analizadorSismico3.imprimirPantallaHoraenAnio();
                                 break;
                             case EXPORTAR_ARCHIVO:
 
@@ -162,24 +212,8 @@ public class Main {
         }
 
         //Haciendo prueba para enviar el archivo csv a un arreglo
-        System.out.println(gestordatos.getDatos().length); //Muestra cantidad total de datos en las celdas
-        System.out.println(gestordatos.getDatos()[2]); //Muestra la celda 3 del arreglo
-        //Prueba de métodos
+        System.out.println(datos.length); //Muestra cantidad total de datos en las celdas
+        System.out.println(datos[2]); //Muestra la celda 3 del arreglo
 
-        /*
-        String linea;
-        try {
-            BufferedReader archivo = new BufferedReader(new FileReader("C:\\Users\\Alvar\\Documents\\Catálogo Sísmico Perú 1960-2021 (DATASET).csv"));
-            linea = archivo.readLine();
-            while (linea != null){
-                System.out.println(linea);
-                linea = archivo.readLine();
-            }
-        }catch (FileNotFoundException e){
-            System.out.println("Archivo no encontrado");
-        }catch (IOException e){
-            System.out.println("No hay lineas para leer");
-        }
-        */
     }
 }
