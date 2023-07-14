@@ -118,7 +118,7 @@ public class AnalizadorSismico {
 
     //Mostrar tabla
     public void imprimirPantallaPorMesRango(int anio, float magnitudInicial, float magnitudFinal){
-        System.out.println("Tabla de eventos sísmicos por mes en el año " + anio + "Según las magnitudes: " +magnitudInicial +" - "+ magnitudFinal);
+        System.out.println("Tabla de eventos sísmicos por mes en el año " + anio + " Según las magnitudes: " +magnitudInicial +" - "+ magnitudFinal);
         for (int i = 1; i <= 12; i++){
             int cantidadEventos = tablaeventos.getOrDefault(i,0);
             System.out.println("Mes " + i + ": "+ cantidadEventos+ " eventos");

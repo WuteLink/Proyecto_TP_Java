@@ -1,5 +1,7 @@
 package pe.edu.utp.tp;
 
+import pe.edu.utp.tp.log.Acceso;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -39,7 +41,12 @@ public class Main {
         //Prueba de modificación
 
 
-        //Definiendo variables
+        //Acceso al sistema
+        Acceso acceso = new Acceso();
+        acceso.cargarUsuario();
+        acceso.iniciarSesion();
+
+
         String txtSubMenu;
         Scanner lector = new Scanner(System.in);
         OpcionPrincipal opcionPrincipal;
@@ -70,7 +77,8 @@ public class Main {
         //Generando operación repetitiva con while para el menú principal y los submenús
         while (salirMenuPrincipal){
             System.out.println(opcPrincipal);
-            opcionPrincipal = OpcionPrincipal.values()[lector.nextByte()];
+            opcionPrincipal = OpcionPrincipal.values()[lector.nextByte()]; //Marca error en esta linea
+            lector.nextLine();
             switch (opcionPrincipal){
 
                 case FIN_DE_PROGRAMA:
