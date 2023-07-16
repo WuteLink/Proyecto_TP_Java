@@ -98,7 +98,7 @@ public class Main {
                     lector.nextLine();
 
                     AnalizadorSismico analizadorSismico = new AnalizadorSismico();
-                    analizadorSismico.generarTablaEventosPorAño(datos, anioIni, anioFin);
+                    String tabla1=analizadorSismico.generarTablaEventosPorAño(datos, anioIni, anioFin);
 
                     while (salirMenuSecundario) {
                         txtSubMenu = "MÓDULO 01 – EVENTOS POR RANGO DE AÑOS";
@@ -113,11 +113,8 @@ public class Main {
                                 analizadorSismico.imprimirPantallaPorAnio(anioIni, anioFin);
                                 break;
                             case EXPORTAR_ARCHIVO:
-                                AnalizadorSismico analizador2 = new AnalizadorSismico();
-                                String tabla1= analizador2.AlmacenarTablaEventosPorAño(datos,anioIni,anioFin);
-                                System.out.print(tabla1);
-                                Exportador.exportarTabla(tabla1,"Tabla1.txt");
 
+                                Exportador.exportarTabla(tabla1,"output/Tabla1.txt");
 
                                 break;
                             default:
@@ -134,7 +131,7 @@ public class Main {
                     lector.nextLine();
 
                     AnalizadorSismico analizadorSismico1 = new AnalizadorSismico();
-                    analizadorSismico1.generarTablasEventosPorMes(datos, anio);
+                    String tabla2=analizadorSismico1.generarTablasEventosPorMes(datos, anio);
 
                     while (salirMenuSecundario){
                         txtSubMenu = "MÓDULO 02 – EVENTOS POR MES DADO UN AÑO";
@@ -148,6 +145,7 @@ public class Main {
                                 analizadorSismico1.imprimirPantallaPorMes(anio);
                                 break;
                             case EXPORTAR_ARCHIVO:
+                                Exportador.exportarTabla(tabla2,"output/Tabla2.txt");
 
                                 break;
                             default:
