@@ -96,7 +96,7 @@ public class AnalizadorSismico {
     }
 
     //Método para generar tabla de eventos pro mes dado un rango de magnitudes
-    public void generarTablaEventosPorMesRango(Sismo[] datos, int anio, float magnitudInicial, float magnitudFinal){
+    public String generarTablaEventosPorMesRango(Sismo[] datos, int anio, float magnitudInicial, float magnitudFinal){
         //Map<Integer, Integer> eventosPorMes = new HashMap<>();
         StringBuilder constructor = new StringBuilder();
         try{
@@ -111,6 +111,15 @@ public class AnalizadorSismico {
                 if (sismoAño == anio && magnitud >= magnitudInicial && magnitud <= magnitudFinal){
                     tablaeventos.put(sismoMes, tablaeventos.getOrDefault(sismoMes,0)+1);
                 }
+
+
+            }
+
+            //Tabla como cadena de texto
+            constructor.append("TABLA DE EVENTOS POR MES EN EL AÑO"+ anio + " según las magnitudes: "+ magnitudInicial +"- "+ magnitudFinal).append(System.lineSeparator());
+            for (int mes=1; mes<=12;mes++) {
+                int cantidadEventos = tablaeventos.getOrDefault(mes, 0);
+                constructor.append("MES: ").append(mes).append(": ").append(cantidadEventos).append(" eventos").append(System.lineSeparator());
             }
 
         }catch (Exception e) {
@@ -118,12 +127,8 @@ public class AnalizadorSismico {
                 System.out.println("Año fuera del rango");
             }
         }
+        return constructor.toString();
 
-        /*System.out.println("Tabla de eventos sísmicos por mes en el año " + anio + "Según las magnitudes: " +magnitudInicial +" - "+ magnitudFinal);
-        for (int i = 1; i <= 12; i++){
-            int cantidadEventos = tablaeventos.getOrDefault(i,0);
-            System.out.println("Mes " + i + ": "+ cantidadEventos+ " eventos");
-        }*/
     }
 
     //Mostrar tabla
@@ -135,8 +140,9 @@ public class AnalizadorSismico {
         }
     }
 
-    public void generarTablaEventosPorHoraenAnio(Sismo[] datos, int anio){
+    public String generarTablaEventosPorHoraenAnio(Sismo[] datos, int anio){
         //Map<Integer, Integer> eventosPorHora  = new HashMap<>();
+        StringBuilder constructor = new StringBuilder();
         try{
             for (Sismo sismo: datos) {
                 Date fecha= sismo.getFecha_utc();
@@ -148,17 +154,20 @@ public class AnalizadorSismico {
                     tablaeventos.put(hora,tablaeventos.getOrDefault(hora,0)+1);
                 }
             }
+            //Tabla como cadena de texto
+            constructor.append("Tabla de eventos por hora").append(System.lineSeparator());
+            for (int i=0; i<=24;i++) {
+                int cantidadEventos = tablaeventos.getOrDefault(i, 0);
+                constructor.append("Hora: ").append(i).append(":00 -").append(i+1).append(":00 >>>>>>>>>").append(cantidadEventos).append(" eventos").append(System.lineSeparator());
+            }
+
         }catch (Exception e) {
             if (anio < AÑO_INICIAL || anio > AÑO_FINAL) {
                 System.out.println("Año fuera del rango");
             }
         }
 
-        /*System.out.println("TABLA DE EVENTOS POR HORA \n");
-        for (int i = 0; i<24; i++){
-            int cantidadEventos= tablaeventos.getOrDefault(i,0);
-            System.out.println("Hora "+ i + ":00 - "+ (i+1)+ ":00: "+ cantidadEventos+ " eventos");
-        }*/
+        return constructor.toString();
     }
 
     //imprimir tabla de eventos por hora

@@ -113,8 +113,9 @@ public class Main {
                                 analizadorSismico.imprimirPantallaPorAnio(anioIni, anioFin);
                                 break;
                             case EXPORTAR_ARCHIVO:
-
-                                Exportador.exportarTabla(tabla1,"output/Tabla1.txt");
+                                System.out.println("¿Qué nombre le desea asignar al archivo?(será de formato .txt)");
+                                String nombre = lector.nextLine();
+                                Exportador.exportarTabla(tabla1,"output/"+ nombre + ".txt");
 
                                 break;
                             default:
@@ -145,7 +146,9 @@ public class Main {
                                 analizadorSismico1.imprimirPantallaPorMes(anio);
                                 break;
                             case EXPORTAR_ARCHIVO:
-                                Exportador.exportarTabla(tabla2,"output/Tabla2.txt");
+                                System.out.println("¿Qué nombre le desea asignar al archivo?(será de formato .txt)");
+                                String nombre = lector.nextLine();
+                                Exportador.exportarTabla(tabla2,"output/"+ nombre + ".txt");
 
                                 break;
                             default:
@@ -163,12 +166,12 @@ public class Main {
                     System.out.println("Ingresar Magnitud inicial");
                     magnitudInicial = lector.nextFloat();
                     lector.nextLine();
-                    System.out.println("Ingresar Magnitud inicial");
+                    System.out.println("Ingresar Magnitud final");
                     magnitudFinal = lector.nextFloat();
                     lector.nextLine();
 
                     AnalizadorSismico analizadorSismico2 = new AnalizadorSismico();
-                    analizadorSismico2.generarTablaEventosPorMesRango(datos, anioParaMagnitud, magnitudInicial, magnitudFinal);
+                    String tabla3=analizadorSismico2.generarTablaEventosPorMesRango(datos, anioParaMagnitud, magnitudInicial, magnitudFinal);
 
                     while (salirMenuSecundario){
                         txtSubMenu = "MÓDULO 03 – EVENTOS POR MES DADOS UN RANGO DE MAGNITUDES Y UN AÑO";
@@ -182,6 +185,9 @@ public class Main {
                                 analizadorSismico2.imprimirPantallaPorMesRango(anioParaMagnitud, magnitudInicial, magnitudFinal);
                                 break;
                             case EXPORTAR_ARCHIVO:
+                                System.out.println("¿Qué nombre le desea asignar al archivo?(será de formato .txt)");
+                                String nombre = lector.nextLine();
+                                Exportador.exportarTabla(tabla3,"output/"+ nombre + ".txt");
 
                                 break;
                             default:
@@ -197,7 +203,7 @@ public class Main {
                     lector.nextLine();
 
                     AnalizadorSismico analizadorSismico3 = new AnalizadorSismico();
-                    analizadorSismico3.generarTablaEventosPorHoraenAnio(datos, anioHora);
+                    String tabla4=analizadorSismico3.generarTablaEventosPorHoraenAnio(datos, anioHora);
 
                     while (salirMenuSecundario){
                         txtSubMenu = "MÓDULO 04 – EVENTOS POR MES DADO UN AÑO";
@@ -211,6 +217,9 @@ public class Main {
                                 analizadorSismico3.imprimirPantallaHoraenAnio();
                                 break;
                             case EXPORTAR_ARCHIVO:
+                                System.out.println("¿Qué nombre le desea asignar al archivo?(será de formato .txt)");
+                                String nombre = lector.nextLine();
+                                Exportador.exportarTabla(tabla4,"output/"+ nombre + ".txt");
 
                                 break;
                             default:
