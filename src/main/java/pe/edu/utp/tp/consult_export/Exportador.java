@@ -1,4 +1,4 @@
-package pe.edu.utp.tp;
+package pe.edu.utp.tp.consult_export;
 
 import java.io.FileWriter;
 import java.io.IOException;

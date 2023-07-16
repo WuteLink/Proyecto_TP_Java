@@ -1,51 +1,27 @@
 package pe.edu.utp.tp;
 
+import pe.edu.utp.tp.consult_export.AnalizadorSismico;
+import pe.edu.utp.tp.consult_export.Exportador;
+import pe.edu.utp.tp.data.GestorDatos;
+import pe.edu.utp.tp.data.Sismo;
 import pe.edu.utp.tp.log.Acceso;
+import pe.edu.utp.tp.opt.OpcionPrincipal;
+import pe.edu.utp.tp.opt.OpcionSecundario;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        /*
-        String Archivocsv = "\\C:\\Users\\USUARIO\\Documents\\College\\3er ciclo\\Taller de programación\\Proyecto docs\\Proyecto TALLER\\Proyecto_TP_Java\\archivo.csv\\";
-        String csvSeparador = ",";
-        AnalizadorDatos analizador = new AnalizadorDatos(Archivocsv,csvSeparador);
-
-        analizador.analizarDatosSismicos();
-        analizador.generarTablaEventosPorAnio();
-
-        int anioDeseado = 2021;
-        analizador.generarTablaEventosPorMes(anioDeseado);*/
 
         GestorDatos gestordatos = new GestorDatos("archivo.csv");
         //GestorDatos gestordatos = new GestorDatos("\\C:\\Users\\USUARIO\\Documents\\College\\3er ciclo\\Taller de programación\\Proyecto docs\\Proyecto TALLER\\Proyecto_TP_Java\\src\\main\\java\\pe\\edu\\utp\\tp\\archivo.csv\\"); //La ruta debe ser relativa porque la ubicación cambia
         Sismo[] datos = gestordatos.getDatos();
 
-        /*Prueba metodos
-        int añoI= 2000;
-        int añoF= 2010;
-        AnalizadorSismico analizador= new AnalizadorSismico();
-        analizador.generarTablaEventosPorAño(datos);//,añoI,añoF);
-        int año= 2010;
-        analizador.generarTablasEventosPorMes(datos,año);
-
-        analizador.generarTablaEventosPorMesRango(datos, año, 3, 4.5f);
-
-        analizador.generarTablaEventosPorHoraenAño(datos, año);*/
-
-        //Prueba de modificación
-
-
         //Acceso al sistema
         Acceso acceso = new Acceso();
         acceso.cargarUsuario();
         acceso.iniciarSesion();
-
 
         String txtSubMenu;
         Scanner lector = new Scanner(System.in);
@@ -87,7 +63,6 @@ public class Main {
                     break;
 
                 case RANGO_DE_ANIOS:
-                    //while (salirMenuSecundario){
                     int anioIni, anioFin;
                     System.out.println("Ingresar rango de año (límite de años entre 1960 - 2021):");
                     System.out.println("Rango inicial");
@@ -116,13 +91,11 @@ public class Main {
                                 System.out.println("¿Qué nombre le desea asignar al archivo?(será de formato .txt)");
                                 String nombre = lector.nextLine();
                                 Exportador.exportarTabla(tabla1,"output/"+ nombre + ".txt");
-
                                 break;
                             default:
                                 System.out.println("Opción inválida");
                         }
                     }
-                    //}
                     break;
 
                 case MES_POR_ANIO:
@@ -220,7 +193,6 @@ public class Main {
                                 System.out.println("¿Qué nombre le desea asignar al archivo?(será de formato .txt)");
                                 String nombre = lector.nextLine();
                                 Exportador.exportarTabla(tabla4,"output/"+ nombre + ".txt");
-
                                 break;
                             default:
                                 System.out.println("Opción inválida");
@@ -231,10 +203,5 @@ public class Main {
                     System.out.println("Opción ingresada no es válida");
             }
         }
-
-        //Haciendo prueba para enviar el archivo csv a un arreglo
-        System.out.println(datos.length); //Muestra cantidad total de datos en las celdas
-        System.out.println(datos[2]); //Muestra la celda 3 del arreglo
-
     }
 }

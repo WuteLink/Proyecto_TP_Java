@@ -1,4 +1,4 @@
-package pe.edu.utp.tp;
+package pe.edu.utp.tp.data;
 
 import java.sql.Time;
 import java.util.Date;

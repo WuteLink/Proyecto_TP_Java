@@ -1,4 +1,6 @@
-package pe.edu.utp.tp;
+package pe.edu.utp.tp.data;
+
+import pe.edu.utp.tp.data.Sismo;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

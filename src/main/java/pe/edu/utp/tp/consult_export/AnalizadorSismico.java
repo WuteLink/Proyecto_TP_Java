@@ -1,4 +1,4 @@
-package pe.edu.utp.tp;
+package pe.edu.utp.tp.consult_export;
 import pe.edu.utp.tp.data.Sismo;
 
 import java.util.*;

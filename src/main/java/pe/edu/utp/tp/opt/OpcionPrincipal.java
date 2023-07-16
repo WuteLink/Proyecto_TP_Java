@@ -1,4 +1,4 @@
-package pe.edu.utp.tp;
+package pe.edu.utp.tp.opt;
 
 public enum OpcionPrincipal {
     FIN_DE_PROGRAMA,
