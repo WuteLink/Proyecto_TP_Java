@@ -1,4 +1,6 @@
 package pe.edu.utp.tp;
+import pe.edu.utp.tp.data.Sismo;
+
 import java.util.*;
 
 public class AnalizadorSismico {
@@ -19,8 +21,6 @@ public class AnalizadorSismico {
         StringBuilder constructor = new StringBuilder();
 
         try{
-            //Map<Integer, Integer> eventosPorAño = new HashMap<>();
-
             for (Sismo sismo: datos) {
                 Date fecha = sismo.getFecha_utc();
                 Calendar calendar = Calendar.getInstance();
@@ -57,7 +57,6 @@ public class AnalizadorSismico {
     //Método para generar tabla de eventos por mes
     public String generarTablasEventosPorMes(Sismo[] datos, int anio){
         StringBuilder constructor = new StringBuilder();
-        //Map<Integer, Integer> eventosPorMes = new HashMap<>();
         try{
             for (Sismo sismo : datos ) {
                 Date fecha = sismo.getFecha_utc();
@@ -97,7 +96,6 @@ public class AnalizadorSismico {
 
     //Método para generar tabla de eventos pro mes dado un rango de magnitudes
     public String generarTablaEventosPorMesRango(Sismo[] datos, int anio, float magnitudInicial, float magnitudFinal){
-        //Map<Integer, Integer> eventosPorMes = new HashMap<>();
         StringBuilder constructor = new StringBuilder();
         try{
             for (Sismo sismo: datos) {
@@ -111,8 +109,6 @@ public class AnalizadorSismico {
                 if (sismoAño == anio && magnitud >= magnitudInicial && magnitud <= magnitudFinal){
                     tablaeventos.put(sismoMes, tablaeventos.getOrDefault(sismoMes,0)+1);
                 }
-
-
             }
 
             //Tabla como cadena de texto

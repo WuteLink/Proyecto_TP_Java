@@ -13,7 +13,6 @@ public class GestorDatos {
     private Sismo datos[];
     private  int numeroLinea;
 
-
     public GestorDatos(String archivo){
         this.archivo = archivo;
         datos = new Sismo[indiceDatosSismo()];
