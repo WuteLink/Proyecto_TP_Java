@@ -113,6 +113,11 @@ public class Main {
                                 analizadorSismico.imprimirPantallaPorAnio(anioIni, anioFin);
                                 break;
                             case EXPORTAR_ARCHIVO:
+                                AnalizadorSismico analizador2 = new AnalizadorSismico();
+                                String tabla1= analizador2.AlmacenarTablaEventosPorAño(datos,anioIni,anioFin);
+                                System.out.print(tabla1);
+                                Exportador.exportarTabla(tabla1,"Tabla1.txt");
+
 
                                 break;
                             default:

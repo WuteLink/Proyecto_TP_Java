@@ -29,17 +29,41 @@ public class AnalizadorSismico {
                     tablaeventos.put(año, tablaeventos.getOrDefault(año,0)+1);
                 }
             }
-            //mostrar la tabla
-            /*System.out.println("TABLA DE EVENTOS SISMICOS POR AÑO ");
-            for (int año = anioIni; año<=anioFin;año++){
-                int cantidadEventos = eventosPorAño.getOrDefault(año,0);
-                System.out.println("AÑO: "+ año + ": "+ cantidadEventos + " eventos");
-            }*/
+
         }catch (Exception e){
             if (anioIni<AÑO_INICIAL || anioFin > AÑO_FINAL || anioIni > anioFin){
                 System.out.println("Rango de años inválido");
             }
         }
+    }
+    //Guardar en un string
+    public String AlmacenarTablaEventosPorAño(Sismo[] datos, int anioIni, int anioFin){
+        StringBuilder constructor = new StringBuilder();
+        try{
+
+            for (Sismo sismo: datos) {
+                Date fecha = sismo.getFecha_utc();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(fecha);
+                int año = calendar.get(Calendar.YEAR);
+
+                if (año >= anioIni && año <= anioFin){
+                    tablaeventos.put(año, tablaeventos.getOrDefault(año,0)+1);
+                }
+            }
+            //Tabla como cadena de texto
+            constructor.append("TABLA EVENTOS SISMICOS POR AÑO").append(System.lineSeparator());
+            for (int año = anioIni; año <= anioFin; año++) {
+                int cantidadEventos = tablaeventos.getOrDefault(año, 0);
+                constructor.append("AÑO: ").append(año).append(": ").append(cantidadEventos).append(" eventos").append(System.lineSeparator());
+            }
+
+        }catch (Exception e){
+            if (anioIni<AÑO_INICIAL || anioFin > AÑO_FINAL || anioIni > anioFin){
+                System.out.println("Rango de años inválido");
+            }
+        }
+        return constructor.toString();
     }
 
     public void imprimirPantallaPorAnio(int anioIni, int anioFin){
