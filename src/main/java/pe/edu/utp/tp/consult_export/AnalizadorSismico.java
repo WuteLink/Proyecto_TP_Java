@@ -1,5 +1,7 @@
 package pe.edu.utp.tp.consult_export;
+import pe.edu.utp.tp.audit.LoggerUtil;
 import pe.edu.utp.tp.data.Sismo;
+import pe.edu.utp.tp.log.Acceso;
 
 import java.util.*;
 
@@ -42,6 +44,7 @@ public class AnalizadorSismico {
             if (anioIni<AÑO_INICIAL || anioFin > AÑO_FINAL || anioIni > anioFin){
                 System.out.println("Rango de años inválido");
             }
+            LoggerUtil.logException(Acceso.getCodIngresado(),e);
         }
         return constructor.toString();
     }

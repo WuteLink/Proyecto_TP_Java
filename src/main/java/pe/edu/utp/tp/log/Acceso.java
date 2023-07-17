@@ -11,6 +11,7 @@ public class Acceso {
     private static final int intentosMAX = 3;
     private static final String ARCHIVO = "src/main/java/pe/edu/utp/tp/log/usuarios.txt";
     private List<Usuario> usuarios;
+    private static String codIngresado;
     public Acceso(){
         usuarios= new ArrayList<>();
 
@@ -38,12 +39,12 @@ public class Acceso {
 
         while (intentos< intentosMAX && !sesionIniciada){
             System.out.println("Ingrese su código de usuario: ");
-            String codigo = input.nextLine();
+            codIngresado = input.nextLine();
             System.out.println("Ingrese su contraseña: ");
             String contraseña = input.nextLine();
 
             for (Usuario usuario:usuarios) {
-                if (usuario.getCodigo().equals(codigo)&& usuario.getContraseña().equals(contraseña)){
+                if (usuario.getCodigo().equals(codIngresado)&& usuario.getContraseña().equals(contraseña)){
                     System.out.println("Sesión inciada.... \n!BIENVENIDO!");
                     sesionIniciada= true;
                     break;
@@ -68,5 +69,7 @@ public class Acceso {
 
     }
 
-
+    public static String getCodIngresado() {
+        return codIngresado;
+    }
 }

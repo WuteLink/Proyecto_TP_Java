@@ -1,5 +1,6 @@
 package pe.edu.utp.tp;
 
+
 import pe.edu.utp.tp.consult_export.AnalizadorSismico;
 import pe.edu.utp.tp.consult_export.Exportador;
 import pe.edu.utp.tp.data.GestorDatos;
@@ -9,10 +10,13 @@ import pe.edu.utp.tp.opt.OpcionPrincipal;
 import pe.edu.utp.tp.opt.OpcionSecundario;
 
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class Main {
 
     public static void main(String[] args) {
+        //Configuración del logger
+
 
         GestorDatos gestordatos = new GestorDatos("archivo.csv");
         //GestorDatos gestordatos = new GestorDatos("\\C:\\Users\\USUARIO\\Documents\\College\\3er ciclo\\Taller de programación\\Proyecto docs\\Proyecto TALLER\\Proyecto_TP_Java\\src\\main\\java\\pe\\edu\\utp\\tp\\archivo.csv\\"); //La ruta debe ser relativa porque la ubicación cambia

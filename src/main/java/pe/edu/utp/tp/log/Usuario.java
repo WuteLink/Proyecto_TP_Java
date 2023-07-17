@@ -9,6 +9,7 @@ public class Usuario {
         this.contraseña = contraseña;
     }
 
+
     public String getCodigo() {
         return codigo;
     }
@@ -24,4 +25,10 @@ public class Usuario {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
+    public String obtenerCodigoUsuario(){
+        Usuario usuario = new Usuario(codigo,contraseña);
+        usuario.setCodigo(codigo);
+        return usuario.getCodigo();
+    }
 }
+
