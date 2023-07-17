@@ -52,6 +52,7 @@ public class Main {
 
         //Generando operación repetitiva con while para el menú principal y los submenús
         while (salirMenuPrincipal){
+            String nombreoutuput="";
             boolean salirMenuSecundario = true;
             System.out.println(opcPrincipal);
             opcionPrincipal = OpcionPrincipal.values()[lector.nextByte()]; //Marca error en esta linea
@@ -89,8 +90,8 @@ public class Main {
                                 break;
                             case EXPORTAR_ARCHIVO:
                                 System.out.println("¿Qué nombre le desea asignar al archivo?(será de formato .txt)");
-                                String nombre = lector.nextLine();
-                                Exportador.exportarTabla(tabla1,"output/"+ nombre + ".txt");
+                                nombreoutuput = lector.nextLine();
+                                Exportador.exportarTabla(tabla1,"output/"+ nombreoutuput + ".txt");
                                 break;
                             default:
                                 System.out.println("Opción inválida");
@@ -111,6 +112,7 @@ public class Main {
                         txtSubMenu = "MÓDULO 02 – EVENTOS POR MES DADO UN AÑO";
                         System.out.printf(opcSecundario,txtSubMenu);
                         opcionSecundario = OpcionSecundario.values()[lector.nextByte()];
+                        lector.nextLine();
                         switch (opcionSecundario){
                             case MENU_PRINCIPAL:
                                 salirMenuSecundario = false;
@@ -120,8 +122,8 @@ public class Main {
                                 break;
                             case EXPORTAR_ARCHIVO:
                                 System.out.println("¿Qué nombre le desea asignar al archivo?(será de formato .txt)");
-                                String nombre = lector.nextLine();
-                                Exportador.exportarTabla(tabla2,"output/"+ nombre + ".txt");
+                                nombreoutuput = lector.nextLine();
+                                Exportador.exportarTabla(tabla2,"output/"+ nombreoutuput + ".txt");
 
                                 break;
                             default:
@@ -150,6 +152,7 @@ public class Main {
                         txtSubMenu = "MÓDULO 03 – EVENTOS POR MES DADOS UN RANGO DE MAGNITUDES Y UN AÑO";
                         System.out.printf(opcSecundario, txtSubMenu);
                         opcionSecundario = OpcionSecundario.values()[lector.nextByte()];
+                        lector.nextLine();
                         switch (opcionSecundario){
                             case MENU_PRINCIPAL:
                                 salirMenuSecundario = false;
@@ -159,8 +162,8 @@ public class Main {
                                 break;
                             case EXPORTAR_ARCHIVO:
                                 System.out.println("¿Qué nombre le desea asignar al archivo?(será de formato .txt)");
-                                String nombre = lector.nextLine();
-                                Exportador.exportarTabla(tabla3,"output/"+ nombre + ".txt");
+                                nombreoutuput = lector.nextLine();
+                                Exportador.exportarTabla(tabla3,"output/"+ nombreoutuput + ".txt");
 
                                 break;
                             default:
@@ -182,6 +185,7 @@ public class Main {
                         txtSubMenu = "MÓDULO 04 – EVENTOS POR MES DADO UN AÑO";
                         System.out.printf(opcSecundario,txtSubMenu);
                         opcionSecundario = OpcionSecundario.values()[lector.nextByte()];
+                        lector.nextLine();
                         switch (opcionSecundario){
                             case MENU_PRINCIPAL:
                                 salirMenuSecundario = false;
@@ -191,8 +195,8 @@ public class Main {
                                 break;
                             case EXPORTAR_ARCHIVO:
                                 System.out.println("¿Qué nombre le desea asignar al archivo?(será de formato .txt)");
-                                String nombre = lector.nextLine();
-                                Exportador.exportarTabla(tabla4,"output/"+ nombre + ".txt");
+                                nombreoutuput = lector.nextLine();
+                                Exportador.exportarTabla(tabla4,"output/"+ nombreoutuput + ".txt");
                                 break;
                             default:
                                 System.out.println("Opción inválida");
