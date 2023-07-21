@@ -21,160 +21,186 @@ public class AnalizadorSismico {
     //Método para generar tabla de eventos por año
     public String generarTablaEventosPorAño(Sismo[] datos, int anioIni, int anioFin){
         StringBuilder constructor = new StringBuilder();
+        try {
+            tablaeventos.clear(); // Reiniciar el mapa antes de generar la tabla
+            int totalEventos = 0;
 
-        try{
-            for (Sismo sismo: datos) {
+            for (Sismo sismo : datos) {
                 Date fecha = sismo.getFecha_utc();
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(fecha);
                 int año = calendar.get(Calendar.YEAR);
 
-                if (año >= anioIni && año <= anioFin){
-                    tablaeventos.put(año, tablaeventos.getOrDefault(año,0)+1);
+                if (año >= anioIni && año <= anioFin) {
+                    tablaeventos.put(año, tablaeventos.getOrDefault(año, 0) + 1);
+                    totalEventos++;
                 }
             }
-            //Tabla como cadena de texto
-            constructor.append("TABLA EVENTOS SISMICOS POR AÑO").append(System.lineSeparator());
+
+            // Tabla como cadena de texto
+            constructor.append("Tabla de eventos para los años: ").append(anioIni).append("-").append(anioFin).append(System.lineSeparator());
+            constructor.append("Nº  AÑO   FREC  PORC").append(System.lineSeparator());
+            constructor.append("===============================").append(System.lineSeparator());
+
+            int numero = 1; // Inicializar el número para contar las filas
             for (int año = anioIni; año <= anioFin; año++) {
                 int cantidadEventos = tablaeventos.getOrDefault(año, 0);
-                constructor.append("AÑO: ").append(año).append(": ").append(cantidadEventos).append(" eventos").append(System.lineSeparator());
+                double porcentaje = (double) cantidadEventos / totalEventos * 100;
+
+                constructor.append(String.format("%02d  %d   %d  %.2f%%", numero, año, cantidadEventos, porcentaje)).append(System.lineSeparator());
+                numero++;
             }
 
-        }catch (Exception e){
-            if (anioIni<AÑO_INICIAL || anioFin > AÑO_FINAL || anioIni > anioFin){
+            constructor.append("===============================").append(System.lineSeparator());
+            constructor.append("TOTAL ").append("  ").append(totalEventos).append("  100.00%").append(System.lineSeparator());
+
+        } catch (Exception e) {
+            if (anioIni < AÑO_INICIAL || anioFin > AÑO_FINAL || anioIni > anioFin) {
                 System.out.println("Rango de años inválido");
             }
-            LoggerUtil.logException(Acceso.getCodIngresado(),e);
+            LoggerUtil.logException(Acceso.getCodIngresado(), e);
         }
         return constructor.toString();
     }
 
-    public void imprimirPantallaPorAnio(int anioIni, int anioFin){
-        System.out.println("TABLA DE EVENTOS SISMICOS POR AÑO ");
-        for (int año = anioIni; año<=anioFin;año++){
-            int cantidadEventos = tablaeventos.getOrDefault(año,0);
-            System.out.println("AÑO: "+ año + ": "+ cantidadEventos + " eventos");
-        }
-    }
 
     //Método para generar tabla de eventos por mes
     public String generarTablasEventosPorMes(Sismo[] datos, int anio){
+
         StringBuilder constructor = new StringBuilder();
-        try{
-            for (Sismo sismo : datos ) {
+        try {
+            tablaeventos.clear(); // Reiniciar el mapa antes de generar la tabla
+            int totalEventos = 0;
+
+            for (Sismo sismo : datos) {
                 Date fecha = sismo.getFecha_utc();
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(fecha);
                 int sismoAño = calendar.get(Calendar.YEAR);
-                int sismoMes = calendar.get(Calendar.MONTH)+1;
+                int sismoMes = calendar.get(Calendar.MONTH) + 1;
 
-                if (sismoAño == anio){
-                    tablaeventos.put(sismoMes, tablaeventos.getOrDefault(sismoMes,0)+1);
+                if (sismoAño == anio) {
+                    tablaeventos.put(sismoMes, tablaeventos.getOrDefault(sismoMes, 0) + 1);
+                    totalEventos++;
                 }
             }
-            //Tabla como cadena de texto
-            constructor.append("TABLA DE EVENTOS POR MES EN EL AÑO"+ anio).append(System.lineSeparator());
-            for (int mes=1; mes<=12;mes++) {
+
+            // Tabla como cadena de texto
+
+            constructor.append("(en este caso los datos corresponden al año ").append(anio).append(")").append(System.lineSeparator());
+            constructor.append("Nº  MES       FREC       PORC").append(System.lineSeparator());
+            constructor.append("===============================").append(System.lineSeparator());
+
+            for (int mes = 1; mes <= 12; mes++) {
                 int cantidadEventos = tablaeventos.getOrDefault(mes, 0);
-                constructor.append("MES: ").append(mes).append(": ").append(cantidadEventos).append(" eventos").append(System.lineSeparator());
+                double porcentaje = (double) cantidadEventos / totalEventos * 100;
+                constructor.append(String.format("%02d  %-9s  %-9d  %.2f%%", mes, obtenerNombreMes(mes), cantidadEventos, porcentaje)).append(System.lineSeparator());
             }
 
-        }catch (Exception e){
-            if (anio<AÑO_INICIAL || anio > AÑO_FINAL){
+            constructor.append("===============================").append(System.lineSeparator());
+            constructor.append(String.format("TOTAL  %-9d  %.2f%%", totalEventos, 100.00)).append(System.lineSeparator());
+
+        } catch (Exception e) {
+            if (anio < AÑO_INICIAL || anio > AÑO_FINAL) {
                 System.out.println("Año fuera del rango");
             }
         }
         return constructor.toString();
-
     }
 
-    //Imprimir pantalla
-    public void imprimirPantallaPorMes(int anio){
-        System.out.println("TABLA DE EVENTOS EN EL AÑO: " + anio);
-        for (int mes = 1; mes <= 12; mes++){
-            int cantidadEventos = tablaeventos.getOrDefault(mes,0);
-            System.out.println("Mes: "+ mes + ": "+ cantidadEventos + " eventos");
-        }
-    }
 
     //Método para generar tabla de eventos pro mes dado un rango de magnitudes
     public String generarTablaEventosPorMesRango(Sismo[] datos, int anio, float magnitudInicial, float magnitudFinal){
         StringBuilder constructor = new StringBuilder();
-        try{
-            for (Sismo sismo: datos) {
-                Date fecha= sismo.getFecha_utc();
+
+        try {
+            tablaeventos.clear(); // Reiniciar el mapa antes de generar la tabla
+            int totalEventos = 0;
+
+            for (Sismo sismo : datos) {
+                Date fecha = sismo.getFecha_utc();
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(fecha);
                 int sismoAño = calendar.get(Calendar.YEAR);
-                int sismoMes = calendar.get(Calendar.MONTH)+1;
+                int sismoMes = calendar.get(Calendar.MONTH) + 1;
                 float magnitud = sismo.getMagnitud();
 
-                if (sismoAño == anio && magnitud >= magnitudInicial && magnitud <= magnitudFinal){
-                    tablaeventos.put(sismoMes, tablaeventos.getOrDefault(sismoMes,0)+1);
+                if (sismoAño == anio && magnitud >= magnitudInicial && magnitud <= magnitudFinal) {
+                    tablaeventos.put(sismoMes, tablaeventos.getOrDefault(sismoMes, 0) + 1);
+                    totalEventos++;
                 }
             }
 
-            //Tabla como cadena de texto
-            constructor.append("TABLA DE EVENTOS POR MES EN EL AÑO"+ anio + " según las magnitudes: "+ magnitudInicial +"- "+ magnitudFinal).append(System.lineSeparator());
-            for (int mes=1; mes<=12;mes++) {
+            // Tabla como cadena de texto
+            constructor.append("Reporte de eventos en el rango de magnitudes ").append(magnitudInicial).append("-").append(magnitudFinal).append(" en el año ").append(anio).append(".").append(System.lineSeparator());
+            constructor.append("Nº  MES       FREC       PORC").append(System.lineSeparator());
+            constructor.append("===============================").append(System.lineSeparator());
+
+            for (int mes = 1; mes <= 12; mes++) {
                 int cantidadEventos = tablaeventos.getOrDefault(mes, 0);
-                constructor.append("MES: ").append(mes).append(": ").append(cantidadEventos).append(" eventos").append(System.lineSeparator());
+                double porcentaje = (double) cantidadEventos / totalEventos * 100;
+                constructor.append(String.format("%02d  %-9s  %-9d  %.2f%%", mes, obtenerNombreMes(mes), cantidadEventos, porcentaje)).append(System.lineSeparator());
             }
 
-        }catch (Exception e) {
+            constructor.append("===============================").append(System.lineSeparator());
+            double porcentajeTotal = totalEventos * 100.0 / totalEventos;
+            constructor.append(String.format("TOTAL  %-9d  %.2f%%", totalEventos, porcentajeTotal)).append(System.lineSeparator());
+
+        } catch (Exception e) {
             if (anio < AÑO_INICIAL || anio > AÑO_FINAL) {
                 System.out.println("Año fuera del rango");
             }
         }
         return constructor.toString();
-
     }
 
-    //Mostrar tabla
-    public void imprimirPantallaPorMesRango(int anio, float magnitudInicial, float magnitudFinal){
-        System.out.println("Tabla de eventos sísmicos por mes en el año " + anio + " Según las magnitudes: " +magnitudInicial +" - "+ magnitudFinal);
-        for (int i = 1; i <= 12; i++){
-            int cantidadEventos = tablaeventos.getOrDefault(i,0);
-            System.out.println("Mes " + i + ": "+ cantidadEventos+ " eventos");
-        }
-    }
 
-    public String generarTablaEventosPorHoraenAnio(Sismo[] datos, int anio){
-        //Map<Integer, Integer> eventosPorHora  = new HashMap<>();
+    public String generarTablaEventosPorHoraenAnio(Sismo[] datos, int anio) {
         StringBuilder constructor = new StringBuilder();
-        try{
-            for (Sismo sismo: datos) {
-                Date fecha= sismo.getFecha_utc();
+        try {
+            Map<Integer, Integer> tablaeventosPorAnio = new HashMap<>();
+
+            for (Sismo sismo : datos) {
+                Date fecha = sismo.getFecha_utc();
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(fecha);
                 int sismoAño = calendar.get(Calendar.YEAR);
-                if (sismoAño == anio ){
-                    int hora= sismo.getHora_utc().toLocalTime().getHour();
-                    tablaeventos.put(hora,tablaeventos.getOrDefault(hora,0)+1);
+
+                if (sismoAño == anio) {
+                    int hora = calendar.get(Calendar.HOUR_OF_DAY);
+                    tablaeventosPorAnio.put(hora, tablaeventosPorAnio.getOrDefault(hora, 0) + 1);
                 }
             }
-            //Tabla como cadena de texto
-            constructor.append("Tabla de eventos por hora").append(System.lineSeparator());
-            for (int i=0; i<=24;i++) {
-                int cantidadEventos = tablaeventos.getOrDefault(i, 0);
-                constructor.append("Hora: ").append(i).append(":00 -").append(i+1).append(":00 >>>>>>>>>").append(cantidadEventos).append(" eventos").append(System.lineSeparator());
+
+            constructor.append("Reporte de eventos por hora en el año ").append(anio).append(".").append(System.lineSeparator());
+            constructor.append("Nº  HORA         FREC       PORC").append(System.lineSeparator());
+            constructor.append("===============================").append(System.lineSeparator());
+
+            int totalEventosPorAnio = tablaeventosPorAnio.values().stream().mapToInt(Integer::intValue).sum();
+
+            for (int hora = 0; hora < 24; hora++) {
+                int cantidadEventos = tablaeventosPorAnio.getOrDefault(hora, 0);
+                double porcentaje = (double) cantidadEventos / totalEventosPorAnio * 100;
+                constructor.append(String.format("%02d  %02d:00-%02d:00  %6d       %.2f%%", hora + 1, hora, hora + 1, cantidadEventos, porcentaje)).append(System.lineSeparator());
             }
 
-        }catch (Exception e) {
+            constructor.append("===============================").append(System.lineSeparator());
+            constructor.append(String.format("TOTAL%28d       100.00%%", totalEventosPorAnio)).append(System.lineSeparator());
+
+        } catch (Exception e) {
             if (anio < AÑO_INICIAL || anio > AÑO_FINAL) {
-                System.out.println("Año fuera del rango");
+                constructor.append("Año fuera del rango").append(System.lineSeparator());
             }
         }
 
         return constructor.toString();
     }
 
-    //imprimir tabla de eventos por hora
-    public void imprimirPantallaHoraenAnio(){
-        System.out.println("TABLA DE EVENTOS POR HORA \n");
-        for (int i = 0; i<24; i++){
-            int cantidadEventos= tablaeventos.getOrDefault(i,0);
-            System.out.println("Hora " + i + ":00 - " + (i+1) + ":00: " + cantidadEventos + " eventos");
-        }
+
+
+    private String obtenerNombreMes(int mes) {
+        String[] meses = {"ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SETIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
+        return meses[mes - 1];
     }
+
 }

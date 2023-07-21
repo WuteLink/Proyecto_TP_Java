@@ -90,7 +90,7 @@ public class Main {
                                 salirMenuSecundario = false;
                                 break;
                             case IMPRIMIR_PANTALLA:
-                                analizadorSismico.imprimirPantallaPorAnio(anioIni, anioFin);
+                                System.out.print(tabla1);
                                 break;
                             case EXPORTAR_ARCHIVO:
                                 System.out.println("¿Qué nombre le desea asignar al archivo?(será de formato .txt)");
@@ -122,7 +122,7 @@ public class Main {
                                 salirMenuSecundario = false;
                                 break;
                             case IMPRIMIR_PANTALLA:
-                                analizadorSismico1.imprimirPantallaPorMes(anio);
+                                System.out.print(tabla2);
                                 break;
                             case EXPORTAR_ARCHIVO:
                                 System.out.println("¿Qué nombre le desea asignar al archivo?(será de formato .txt)");
@@ -162,7 +162,7 @@ public class Main {
                                 salirMenuSecundario = false;
                                 break;
                             case IMPRIMIR_PANTALLA:
-                                analizadorSismico2.imprimirPantallaPorMesRango(anioParaMagnitud, magnitudInicial, magnitudFinal);
+                                System.out.print(tabla3);
                                 break;
                             case EXPORTAR_ARCHIVO:
                                 System.out.println("¿Qué nombre le desea asignar al archivo?(será de formato .txt)");
@@ -195,7 +195,7 @@ public class Main {
                                 salirMenuSecundario = false;
                                 break;
                             case IMPRIMIR_PANTALLA:
-                                analizadorSismico3.imprimirPantallaHoraenAnio();
+                                System.out.print(tabla4);
                                 break;
                             case EXPORTAR_ARCHIVO:
                                 System.out.println("¿Qué nombre le desea asignar al archivo?(será de formato .txt)");
