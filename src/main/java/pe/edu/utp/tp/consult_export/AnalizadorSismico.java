@@ -3,6 +3,7 @@ import pe.edu.utp.tp.audit.LoggerUtil;
 import pe.edu.utp.tp.data.Sismo;
 import pe.edu.utp.tp.log.Acceso;
 
+import java.sql.Time;
 import java.util.*;
 
 public class AnalizadorSismico {
@@ -157,18 +158,23 @@ public class AnalizadorSismico {
 
     public String generarTablaEventosPorHoraenAnio(Sismo[] datos, int anio) {
         StringBuilder constructor = new StringBuilder();
+
         try {
-            Map<Integer, Integer> tablaeventosPorAnio = new HashMap<>();
+            tablaeventos.clear();
+            //Map<Integer, Integer> tablaeventosPorAnio = new HashMap<>();
 
             for (Sismo sismo : datos) {
                 Date fecha = sismo.getFecha_utc();
+                Time horaa = sismo.getHora_utc();
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(fecha);
+
                 int sismoAño = calendar.get(Calendar.YEAR);
 
                 if (sismoAño == anio) {
+                    calendar.setTime(horaa);
                     int hora = calendar.get(Calendar.HOUR_OF_DAY);
-                    tablaeventosPorAnio.put(hora, tablaeventosPorAnio.getOrDefault(hora, 0) + 1);
+                    tablaeventos.put(hora, tablaeventos.getOrDefault(hora, 0) + 1);
                 }
             }
 
@@ -176,12 +182,12 @@ public class AnalizadorSismico {
             constructor.append("Nº  HORA         FREC       PORC").append(System.lineSeparator());
             constructor.append("===============================").append(System.lineSeparator());
 
-            int totalEventosPorAnio = tablaeventosPorAnio.values().stream().mapToInt(Integer::intValue).sum();
+            int totalEventosPorAnio = tablaeventos.values().stream().mapToInt(Integer::intValue).sum();
 
             for (int hora = 0; hora < 24; hora++) {
-                int cantidadEventos = tablaeventosPorAnio.getOrDefault(hora, 0);
+                int cantidadEventos = tablaeventos.getOrDefault(hora, 0);
                 double porcentaje = (double) cantidadEventos / totalEventosPorAnio * 100;
-                constructor.append(String.format("%02d  %02d:00-%02d:00  %6d       %.2f%%", hora + 1, hora, hora + 1, cantidadEventos, porcentaje)).append(System.lineSeparator());
+                constructor.append(String.format("%2d  %2d:00-%2d:00  %6d       %.2f%%", hora+1 , hora, hora+1, cantidadEventos, porcentaje)).append(System.lineSeparator());
             }
 
             constructor.append("===============================").append(System.lineSeparator());
@@ -195,7 +201,6 @@ public class AnalizadorSismico {
 
         return constructor.toString();
     }
-
 
 
     private String obtenerNombreMes(int mes) {
