@@ -22,6 +22,8 @@ public class AnalizadorSismico {
     //Método para generar tabla de eventos por año
     public String generarTablaEventosPorAño(Sismo[] datos, int anioIni, int anioFin){
         StringBuilder constructor = new StringBuilder();
+        double porcentajeTotal = 0;
+
         try {
             tablaeventos.clear(); // Reiniciar el mapa antes de generar la tabla
             int totalEventos = 0;
@@ -47,13 +49,14 @@ public class AnalizadorSismico {
             for (int año = anioIni; año <= anioFin; año++) {
                 int cantidadEventos = tablaeventos.getOrDefault(año, 0);
                 double porcentaje = (double) cantidadEventos / totalEventos * 100;
-
+                porcentajeTotal = porcentaje + porcentajeTotal;
                 constructor.append(String.format("%02d  %d   %d  %.2f%%", numero, año, cantidadEventos, porcentaje)).append(System.lineSeparator());
                 numero++;
             }
 
             constructor.append("===============================").append(System.lineSeparator());
-            constructor.append("TOTAL ").append("  ").append(totalEventos).append("  100.00%").append(System.lineSeparator());
+            //constructor.append("TOTAL ").append("  ").append(totalEventos).append("  100.00%").append(System.lineSeparator());
+            constructor.append(String.format("TOTAL  %-9d  %.2f%%", totalEventos, porcentajeTotal)).append(System.lineSeparator());
 
         } catch (Exception e) {
             if (anioIni < AÑO_INICIAL || anioFin > AÑO_FINAL || anioIni > anioFin) {
@@ -64,11 +67,11 @@ public class AnalizadorSismico {
         return constructor.toString();
     }
 
-
     //Método para generar tabla de eventos por mes
     public String generarTablasEventosPorMes(Sismo[] datos, int anio){
-
         StringBuilder constructor = new StringBuilder();
+        double porcentajeTotal = 0;
+
         try {
             tablaeventos.clear(); // Reiniciar el mapa antes de generar la tabla
             int totalEventos = 0;
@@ -95,11 +98,12 @@ public class AnalizadorSismico {
             for (int mes = 1; mes <= 12; mes++) {
                 int cantidadEventos = tablaeventos.getOrDefault(mes, 0);
                 double porcentaje = (double) cantidadEventos / totalEventos * 100;
+                porcentajeTotal = porcentaje + porcentajeTotal;
                 constructor.append(String.format("%02d  %-9s  %-9d  %.2f%%", mes, obtenerNombreMes(mes), cantidadEventos, porcentaje)).append(System.lineSeparator());
             }
 
             constructor.append("===============================").append(System.lineSeparator());
-            constructor.append(String.format("TOTAL  %-9d  %.2f%%", totalEventos, 100.00)).append(System.lineSeparator());
+            constructor.append(String.format("TOTAL  %-9d  %.2f%%", totalEventos, porcentajeTotal)).append(System.lineSeparator());
 
         } catch (Exception e) {
             if (anio < AÑO_INICIAL || anio > AÑO_FINAL) {
@@ -109,10 +113,10 @@ public class AnalizadorSismico {
         return constructor.toString();
     }
 
-
     //Método para generar tabla de eventos pro mes dado un rango de magnitudes
     public String generarTablaEventosPorMesRango(Sismo[] datos, int anio, float magnitudInicial, float magnitudFinal){
         StringBuilder constructor = new StringBuilder();
+        double porcentajeTotal = 0;
 
         try {
             tablaeventos.clear(); // Reiniciar el mapa antes de generar la tabla
@@ -140,11 +144,11 @@ public class AnalizadorSismico {
             for (int mes = 1; mes <= 12; mes++) {
                 int cantidadEventos = tablaeventos.getOrDefault(mes, 0);
                 double porcentaje = (double) cantidadEventos / totalEventos * 100;
+                porcentajeTotal = porcentaje + porcentajeTotal;
                 constructor.append(String.format("%02d  %-9s  %-9d  %.2f%%", mes, obtenerNombreMes(mes), cantidadEventos, porcentaje)).append(System.lineSeparator());
             }
 
             constructor.append("===============================").append(System.lineSeparator());
-            double porcentajeTotal = totalEventos * 100.0 / totalEventos;
             constructor.append(String.format("TOTAL  %-9d  %.2f%%", totalEventos, porcentajeTotal)).append(System.lineSeparator());
 
         } catch (Exception e) {
@@ -155,9 +159,9 @@ public class AnalizadorSismico {
         return constructor.toString();
     }
 
-
     public String generarTablaEventosPorHoraenAnio(Sismo[] datos, int anio) {
         StringBuilder constructor = new StringBuilder();
+        double porcentajeTotal = 0;
 
         try {
             tablaeventos.clear();
@@ -187,25 +191,23 @@ public class AnalizadorSismico {
             for (int hora = 0; hora < 24; hora++) {
                 int cantidadEventos = tablaeventos.getOrDefault(hora, 0);
                 double porcentaje = (double) cantidadEventos / totalEventosPorAnio * 100;
+                porcentajeTotal = porcentaje + porcentajeTotal;
                 constructor.append(String.format("%2d  %2d:00-%2d:00  %6d       %.2f%%", hora+1 , hora, hora+1, cantidadEventos, porcentaje)).append(System.lineSeparator());
             }
 
-            constructor.append("===============================").append(System.lineSeparator());
-            constructor.append(String.format("TOTAL%28d       100.00%%", totalEventosPorAnio)).append(System.lineSeparator());
+            constructor.append("===================================").append(System.lineSeparator());
+            constructor.append(String.format("TOTAL%18d    %7.2f%%", totalEventosPorAnio, porcentajeTotal)).append(System.lineSeparator());
 
         } catch (Exception e) {
             if (anio < AÑO_INICIAL || anio > AÑO_FINAL) {
                 constructor.append("Año fuera del rango").append(System.lineSeparator());
             }
         }
-
         return constructor.toString();
     }
-
 
     private String obtenerNombreMes(int mes) {
         String[] meses = {"ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SETIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
         return meses[mes - 1];
     }
-
 }

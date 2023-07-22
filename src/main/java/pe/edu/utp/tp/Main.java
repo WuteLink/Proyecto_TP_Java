@@ -17,7 +17,6 @@ public class Main {
     public static void main(String[] args) {
         //Configuración del logger
 
-
         GestorDatos gestordatos = new GestorDatos("archivo.csv");
         //GestorDatos gestordatos = new GestorDatos("\\C:\\Users\\USUARIO\\Documents\\College\\3er ciclo\\Taller de programación\\Proyecto docs\\Proyecto TALLER\\Proyecto_TP_Java\\src\\main\\java\\pe\\edu\\utp\\tp\\archivo.csv\\"); //La ruta debe ser relativa porque la ubicación cambia
         Sismo[] datos = gestordatos.getDatos();
