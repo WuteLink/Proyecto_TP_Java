@@ -1,5 +1,6 @@
 package pe.edu.utp.tp.data;
 
+import pe.edu.utp.tp.audit.LoggerUtil;
 import pe.edu.utp.tp.data.Sismo;
 
 import java.io.BufferedReader;
@@ -9,6 +10,8 @@ import java.io.IOException;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
+import static pe.edu.utp.tp.log.Acceso.getCodIngresado;
 
 public class GestorDatos {
     private String archivo;
@@ -56,8 +59,10 @@ public class GestorDatos {
 
         }catch (FileNotFoundException e){
             System.out.println("Archivo no encontrado");
+            LoggerUtil.logException("Error de archivo", "archivo no entontrado", getCodIngresado());
         }catch (IOException e){
             System.out.println("No hay lineas para leer");
+            LoggerUtil.logException("Error de lectura", "Sin lineas para leer", getCodIngresado());
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -80,8 +85,10 @@ public class GestorDatos {
             numeroLinea = contador-1;
         }catch (FileNotFoundException e){
             System.out.println("Archivo no encontrado");
+            LoggerUtil.logException("Error de archivo", "archivo no entontrado", getCodIngresado());
         }catch (IOException e){
             System.out.println("No hay lineas para leer");
+            LoggerUtil.logException("Error de lectura", "Sin lineas para leer", getCodIngresado());
         }
         return numeroLinea;
     }

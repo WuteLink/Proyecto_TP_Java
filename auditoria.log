@@ -22,3 +22,6 @@ WARNING: Fecha: Sun Jul 23 01:53:04 PET 2023 Usuario: U22218459 Tipo de error: E
 jul 23, 2023 1:53:16 A. M. pe.edu.utp.tp.audit.LoggerUtil logException
 WARNING: Fecha: Sun Jul 23 01:53:16 PET 2023 Usuario: U22218459 Tipo de error: Error de ingreso de datos Mensaje de error: Tipo de datos incorrectos
 
+jul 23, 2023 2:03:11 A. M. pe.edu.utp.tp.audit.LoggerUtil logException
+WARNING: Fecha: Sun Jul 23 02:03:11 PET 2023 Usuario: U22218459 Tipo de error: Error de ingreso de datos Mensaje de error: Datos fuera del rango
+

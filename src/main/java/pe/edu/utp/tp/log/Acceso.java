@@ -71,7 +71,7 @@ public class Acceso {
 
                 }
             }catch (Exception e){
-                //LoggerUtil.logException(getCodIngresado(),e);
+                LoggerUtil.logException("Error de verificación", "Error al iniciar sesión", getCodIngresado());
 
             }
 
