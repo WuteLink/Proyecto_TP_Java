@@ -20,11 +20,21 @@ public class AnalizadorSismico {
     //Funciones para sacar las tablas
 
     //Método para generar tabla de eventos por año
+    private void validarDato(int anio) {
+        if (anio < AÑO_INICIAL || anio > AÑO_FINAL) {
+
+            LoggerUtil.logException("Error de ingreso de datos", "Datos fuera del rango", Acceso.getCodIngresado());
+            throw new IllegalArgumentException("Error en el ingreso de datos");
+        }
+    }
+
     public String generarTablaEventosPorAño(Sismo[] datos, int anioIni, int anioFin){
         StringBuilder constructor = new StringBuilder();
         double porcentajeTotal = 0;
 
         try {
+            validarDato(anioIni);
+            validarDato(anioFin);
             tablaeventos.clear(); // Reiniciar el mapa antes de generar la tabla
             int totalEventos = 0;
 
@@ -59,12 +69,7 @@ public class AnalizadorSismico {
             constructor.append(String.format("TOTAL  %-9d  %.2f%%", totalEventos, porcentajeTotal)).append(System.lineSeparator());
 
         } catch (Exception e) {
-            if (anioIni < AÑO_INICIAL || anioFin > AÑO_FINAL || anioIni > anioFin) {
-                LoggerUtil.logException("Error de ingreso de datos", "Rango de años o tipo de datos incorrecto", Acceso.getCodIngresado());
-            }else {
-                LoggerUtil.logException("Error de ingreso de datos", "Rango de años o tipo de datos incorrecto", Acceso.getCodIngresado());
-            }
-
+            throw e;
 
         }
         return constructor.toString();
@@ -76,6 +81,7 @@ public class AnalizadorSismico {
         double porcentajeTotal = 0;
 
         try {
+            validarDato(anio);
             tablaeventos.clear(); // Reiniciar el mapa antes de generar la tabla
             int totalEventos = 0;
 
@@ -108,11 +114,7 @@ public class AnalizadorSismico {
             constructor.append("===============================").append(System.lineSeparator());
             constructor.append(String.format("TOTAL  %-9d  %.2f%%", totalEventos, porcentajeTotal)).append(System.lineSeparator());
 
-        } catch (Exception e) {
-            if (anio < AÑO_INICIAL || anio > AÑO_FINAL) {
-                System.out.println("Año fuera del rango");
-            }
-            LoggerUtil.logException("Error de ingreso de datos", "Rango de años o tipo de datos incorrecto", Acceso.getCodIngresado());
+        }  catch (Exception e) {
             throw e;
 
         }
@@ -125,6 +127,7 @@ public class AnalizadorSismico {
         double porcentajeTotal = 0;
 
         try {
+            validarDato(anio);
             tablaeventos.clear(); // Reiniciar el mapa antes de generar la tabla
             int totalEventos = 0;
 
@@ -157,11 +160,9 @@ public class AnalizadorSismico {
             constructor.append("===============================").append(System.lineSeparator());
             constructor.append(String.format("TOTAL  %-9d  %.2f%%", totalEventos, porcentajeTotal)).append(System.lineSeparator());
 
-        } catch (Exception e) {
-            if (anio < AÑO_INICIAL || anio > AÑO_FINAL) {
-                System.out.println("Año fuera del rango");
-            }
-            LoggerUtil.logException("Error de ingreso de datos", "Rango de años o tipo de datos incorrecto", Acceso.getCodIngresado());
+        }  catch (Exception e) {
+            throw e;
+
         }
         return constructor.toString();
     }
@@ -171,6 +172,7 @@ public class AnalizadorSismico {
         double porcentajeTotal = 0;
 
         try {
+            validarDato(anio);
             tablaeventos.clear();
             //Map<Integer, Integer> tablaeventosPorAnio = new HashMap<>();
 
@@ -205,12 +207,9 @@ public class AnalizadorSismico {
             constructor.append("===================================").append(System.lineSeparator());
             constructor.append(String.format("TOTAL%18d    %7.2f%%", totalEventosPorAnio, porcentajeTotal)).append(System.lineSeparator());
 
-        } catch (Exception e) {
-            if (anio < AÑO_INICIAL || anio > AÑO_FINAL) {
-                constructor.append("Año fuera del rango").append(System.lineSeparator());
-                LoggerUtil.logException("Error de ingreso de datos", "Rango de años o tipo de datos incorrecto", Acceso.getCodIngresado());
-            }
-            LoggerUtil.logException("Error de ingreso de datos", "Rango de años o tipo de datos incorrecto", Acceso.getCodIngresado());
+        }  catch (Exception e) {
+            throw e;
+
         }
         return constructor.toString();
     }

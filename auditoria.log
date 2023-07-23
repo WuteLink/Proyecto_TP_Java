@@ -1,9 +1,24 @@
-[2023-07-17 18:41:04] [SEVERE] [main] [[U22218459] Error: output\tablaprueba???¿'¿-´´{**.txt (El nombre de archivo, el nombre de directorio o la sintaxis de la etiqueta del volumen no son correctos)] [java.io.FileNotFoundException: output\tablaprueba???¿'¿-´´{**.txt (El nombre de archivo, el nombre de directorio o la sintaxis de la etiqueta del volumen no son correctos)] 
-[2023-07-21 11:55:28] [SEVERE] [main] [[U22218459] Error: f != java.lang.Integer] [java.util.IllegalFormatConversionException: f != java.lang.Integer] 
-[2023-07-22 22:07:55] [SEVERE] [main] [[U22218459] Error: output\¿'2¿''¿??¡d'w.txt (El nombre de archivo, el nombre de directorio o la sintaxis de la etiqueta del volumen no son correctos)] [java.io.FileNotFoundException: output\¿'2¿''¿??¡d'w.txt (El nombre de archivo, el nombre de directorio o la sintaxis de la etiqueta del volumen no son correctos)] 
-[2023-07-22 22:14:36] [SEVERE] [main] [[U22218459] Error: null] [java.util.InputMismatchException] 
-[2023-07-22 22:15:15] [SEVERE] [main] [[U22218459] Error: null] [java.util.InputMismatchException] 
-[2023-07-22 22:16:45] [SEVERE] [main] [[U22218459] Error: null] [java.util.InputMismatchException] 
-jul 22, 2023 10:54:29 P. M. pe.edu.utp.tp.audit.LoggerUtil logException
-WARNING: Fecha: Sat Jul 22 22:54:29 PET 2023 Usuario: U22218459 Tipo de error: Error de exportación Mensaje de error: Ruta de acceso o símbolos no admitidos
+jul 23, 2023 1:30:42 A. M. pe.edu.utp.tp.audit.LoggerUtil logException
+WARNING: Fecha: Sun Jul 23 01:30:42 PET 2023 Usuario: U22218459 Tipo de error: Error de ingreso de datos Mensaje de error: Año fuera del rango permitido: 2039120394
+
+jul 23, 2023 1:32:07 A. M. pe.edu.utp.tp.audit.LoggerUtil logException
+WARNING: Fecha: Sun Jul 23 01:32:07 PET 2023 Usuario: U22218459 Tipo de error: Error de ingreso de datos Mensaje de error: Datos fuera del rango
+
+jul 23, 2023 1:36:42 A. M. pe.edu.utp.tp.audit.LoggerUtil logException
+WARNING: Fecha: Sun Jul 23 01:36:42 PET 2023 Usuario: U22218459 Tipo de error: Error de ingreso de datos Mensaje de error: Datos fuera del rango
+
+jul 23, 2023 1:46:56 A. M. pe.edu.utp.tp.audit.LoggerUtil logException
+WARNING: Fecha: Sun Jul 23 01:46:56 PET 2023 Usuario: U22218459 Tipo de error: Error de ingreso de datos Mensaje de error: Opción inválida. Por favor, ingrese un número válido.
+
+jul 23, 2023 1:48:20 A. M. pe.edu.utp.tp.audit.LoggerUtil logException
+WARNING: Fecha: Sun Jul 23 01:48:20 PET 2023 Usuario: U22218459 Tipo de error: Error de ingreso de datos Mensaje de error: Opción inválida. Por favor, ingrese un número válido.
+
+jul 23, 2023 1:52:46 A. M. pe.edu.utp.tp.audit.LoggerUtil logException
+WARNING: Fecha: Sun Jul 23 01:52:46 PET 2023 Usuario: U22218459 Tipo de error: Error de ingreso de datos Mensaje de error: Tipo de datos incorrectos
+
+jul 23, 2023 1:53:04 A. M. pe.edu.utp.tp.audit.LoggerUtil logException
+WARNING: Fecha: Sun Jul 23 01:53:04 PET 2023 Usuario: U22218459 Tipo de error: Error de ingreso de datos Mensaje de error: Tipo de datos incorrectos
+
+jul 23, 2023 1:53:16 A. M. pe.edu.utp.tp.audit.LoggerUtil logException
+WARNING: Fecha: Sun Jul 23 01:53:16 PET 2023 Usuario: U22218459 Tipo de error: Error de ingreso de datos Mensaje de error: Tipo de datos incorrectos
 

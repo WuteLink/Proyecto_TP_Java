@@ -1,6 +1,7 @@
 package pe.edu.utp.tp;
 
 
+import pe.edu.utp.tp.audit.LoggerUtil;
 import pe.edu.utp.tp.consult_export.AnalizadorSismico;
 import pe.edu.utp.tp.consult_export.Exportador;
 import pe.edu.utp.tp.data.GestorDatos;
@@ -9,6 +10,7 @@ import pe.edu.utp.tp.log.Acceso;
 import pe.edu.utp.tp.opt.OpcionPrincipal;
 import pe.edu.utp.tp.opt.OpcionSecundario;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -58,8 +60,15 @@ public class Main {
             String nombreoutuput="";
             boolean salirMenuSecundario = true;
             System.out.println(opcPrincipal);
-            opcionPrincipal = OpcionPrincipal.values()[lector.nextByte()]; //Marca error en esta linea
-            lector.nextLine();
+            try {
+                opcionPrincipal = OpcionPrincipal.values()[lector.nextInt()];
+                lector.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Opción inválida. Por favor, ingrese un número válido.");
+                LoggerUtil.logException("Error de ingreso de datos", "Tipo de datos incorrectos", Acceso.getCodIngresado());
+                lector.nextLine();
+                continue;
+            }
             switch (opcionPrincipal){
 
                 case FIN_DE_PROGRAMA:
@@ -69,12 +78,19 @@ public class Main {
                 case RANGO_DE_ANIOS:
                     int anioIni, anioFin;
                     System.out.println("Ingresar rango de año (límite de años entre 1960 - 2021):");
-                    System.out.println("Rango inicial");
-                    anioIni = lector.nextInt();
-                    lector.nextLine();
-                    System.out.println("Rango final");
-                    anioFin = lector.nextInt();
-                    lector.nextLine();
+                    try{
+                        System.out.println("Rango inicial");
+                        anioIni = lector.nextInt();
+                        lector.nextLine();
+                        System.out.println("Rango final");
+                        anioFin = lector.nextInt();
+                        lector.nextLine();
+                    }catch (InputMismatchException e){
+                        System.out.println("Opción inválida. Por favor, ingrese un número válido.");
+                        LoggerUtil.logException("Error de ingreso de datos", "Tipo de datos incorrectos", Acceso.getCodIngresado());
+                        lector.nextLine();
+                        continue;
+                    }
 
                     AnalizadorSismico analizadorSismico = new AnalizadorSismico();
                     String tabla1=analizadorSismico.generarTablaEventosPorAño(datos, anioIni, anioFin);
@@ -105,8 +121,15 @@ public class Main {
                 case MES_POR_ANIO:
                     int anio;
                     System.out.println("Ingresar año dentro del rango (1960 - 2021)");
-                    anio = lector.nextInt();
-                    lector.nextLine();
+                    try{
+                        anio = lector.nextInt();
+                        lector.nextLine();
+                    }catch (InputMismatchException e){
+                        System.out.println("Opción inválida. Por favor, ingrese un número válido.");
+                        LoggerUtil.logException("Error de ingreso de datos", "Tipo de datos incorrectos", Acceso.getCodIngresado());
+                        lector.nextLine();
+                        continue;
+                    }
 
                     AnalizadorSismico analizadorSismico1 = new AnalizadorSismico();
                     String tabla2=analizadorSismico1.generarTablasEventosPorMes(datos, anio);
@@ -138,15 +161,22 @@ public class Main {
                 case MES_POR_RANGO_MAGNITUDES_Y_ANIO:
                     int anioParaMagnitud;
                     float magnitudInicial, magnitudFinal;
-                    System.out.println("Ingresar año dentro del rango (1960 - 2021)");
-                    anioParaMagnitud = lector.nextInt();
-                    lector.nextLine();
-                    System.out.println("Ingresar Magnitud inicial");
-                    magnitudInicial = lector.nextFloat();
-                    lector.nextLine();
-                    System.out.println("Ingresar Magnitud final");
-                    magnitudFinal = lector.nextFloat();
-                    lector.nextLine();
+                    try{
+                        System.out.println("Ingresar año dentro del rango (1960 - 2021)");
+                        anioParaMagnitud = lector.nextInt();
+                        lector.nextLine();
+                        System.out.println("Ingresar Magnitud inicial");
+                        magnitudInicial = lector.nextFloat();
+                        lector.nextLine();
+                        System.out.println("Ingresar Magnitud final");
+                        magnitudFinal = lector.nextFloat();
+                        lector.nextLine();
+                    }catch (InputMismatchException e){
+                        System.out.println("Opción inválida. Por favor, ingrese un número válido.");
+                        LoggerUtil.logException("Error de ingreso de datos", "Tipo de datos incorrectos", Acceso.getCodIngresado());
+                        lector.nextLine();
+                        continue;
+                    }
 
                     AnalizadorSismico analizadorSismico2 = new AnalizadorSismico();
                     String tabla3=analizadorSismico2.generarTablaEventosPorMesRango(datos, anioParaMagnitud, magnitudInicial, magnitudFinal);
@@ -177,9 +207,16 @@ public class Main {
 
                 case HORA_POR_ANIO:
                     int anioHora;
-                    System.out.println("Ingresar año dentro del rango (1960 - 2021)");
-                    anioHora = lector.nextInt();
-                    lector.nextLine();
+                    try {
+                        System.out.println("Ingresar año dentro del rango (1960 - 2021)");
+                        anioHora = lector.nextInt();
+                        lector.nextLine();
+                    }catch (InputMismatchException e){
+                        System.out.println("Opción inválida. Por favor, ingrese un número válido.");
+                        LoggerUtil.logException("Error de ingreso de datos", "Tipo de datos incorrectos", Acceso.getCodIngresado());
+                        lector.nextLine();
+                        continue;
+                    }
 
                     AnalizadorSismico analizadorSismico3 = new AnalizadorSismico();
                     String tabla4=analizadorSismico3.generarTablaEventosPorHoraenAnio(datos, anioHora);
