@@ -1,2 +1,9 @@
 [2023-07-17 18:41:04] [SEVERE] [main] [[U22218459] Error: output\tablaprueba???¿'¿-´´{**.txt (El nombre de archivo, el nombre de directorio o la sintaxis de la etiqueta del volumen no son correctos)] [java.io.FileNotFoundException: output\tablaprueba???¿'¿-´´{**.txt (El nombre de archivo, el nombre de directorio o la sintaxis de la etiqueta del volumen no son correctos)] 
 [2023-07-21 11:55:28] [SEVERE] [main] [[U22218459] Error: f != java.lang.Integer] [java.util.IllegalFormatConversionException: f != java.lang.Integer] 
+[2023-07-22 22:07:55] [SEVERE] [main] [[U22218459] Error: output\¿'2¿''¿??¡d'w.txt (El nombre de archivo, el nombre de directorio o la sintaxis de la etiqueta del volumen no son correctos)] [java.io.FileNotFoundException: output\¿'2¿''¿??¡d'w.txt (El nombre de archivo, el nombre de directorio o la sintaxis de la etiqueta del volumen no son correctos)] 
+[2023-07-22 22:14:36] [SEVERE] [main] [[U22218459] Error: null] [java.util.InputMismatchException] 
+[2023-07-22 22:15:15] [SEVERE] [main] [[U22218459] Error: null] [java.util.InputMismatchException] 
+[2023-07-22 22:16:45] [SEVERE] [main] [[U22218459] Error: null] [java.util.InputMismatchException] 
+jul 22, 2023 10:54:29 P. M. pe.edu.utp.tp.audit.LoggerUtil logException
+WARNING: Fecha: Sat Jul 22 22:54:29 PET 2023 Usuario: U22218459 Tipo de error: Error de exportación Mensaje de error: Ruta de acceso o símbolos no admitidos
+

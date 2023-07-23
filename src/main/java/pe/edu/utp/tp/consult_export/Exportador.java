@@ -18,7 +18,7 @@ public class Exportador {
             System.out.println("Error al exportar archivo ");
             System.out.println("Usted está ingresando símbolos no admitidos");
             e.printStackTrace();
-            LoggerUtil.logException(Acceso.getCodIngresado(),e);
+            LoggerUtil.logException("Error de exportación", "Ruta de acceso o símbolos no admitidos", Acceso.getCodIngresado());
 
         }
 

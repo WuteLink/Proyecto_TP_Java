@@ -60,9 +60,12 @@ public class AnalizadorSismico {
 
         } catch (Exception e) {
             if (anioIni < AÑO_INICIAL || anioFin > AÑO_FINAL || anioIni > anioFin) {
-                System.out.println("Rango de años inválido");
+                LoggerUtil.logException("Error de ingreso de datos", "Rango de años o tipo de datos incorrecto", Acceso.getCodIngresado());
+            }else {
+                LoggerUtil.logException("Error de ingreso de datos", "Rango de años o tipo de datos incorrecto", Acceso.getCodIngresado());
             }
-            LoggerUtil.logException(Acceso.getCodIngresado(), e);
+
+
         }
         return constructor.toString();
     }
@@ -109,6 +112,9 @@ public class AnalizadorSismico {
             if (anio < AÑO_INICIAL || anio > AÑO_FINAL) {
                 System.out.println("Año fuera del rango");
             }
+            LoggerUtil.logException("Error de ingreso de datos", "Rango de años o tipo de datos incorrecto", Acceso.getCodIngresado());
+            throw e;
+
         }
         return constructor.toString();
     }
@@ -155,6 +161,7 @@ public class AnalizadorSismico {
             if (anio < AÑO_INICIAL || anio > AÑO_FINAL) {
                 System.out.println("Año fuera del rango");
             }
+            LoggerUtil.logException("Error de ingreso de datos", "Rango de años o tipo de datos incorrecto", Acceso.getCodIngresado());
         }
         return constructor.toString();
     }
@@ -201,7 +208,9 @@ public class AnalizadorSismico {
         } catch (Exception e) {
             if (anio < AÑO_INICIAL || anio > AÑO_FINAL) {
                 constructor.append("Año fuera del rango").append(System.lineSeparator());
+                LoggerUtil.logException("Error de ingreso de datos", "Rango de años o tipo de datos incorrecto", Acceso.getCodIngresado());
             }
+            LoggerUtil.logException("Error de ingreso de datos", "Rango de años o tipo de datos incorrecto", Acceso.getCodIngresado());
         }
         return constructor.toString();
     }

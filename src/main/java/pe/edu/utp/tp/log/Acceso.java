@@ -1,4 +1,6 @@
 package pe.edu.utp.tp.log;
+import pe.edu.utp.tp.audit.LoggerUtil;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -30,6 +32,7 @@ public class Acceso {
             }
         }catch(IOException e){
             System.out.println("Error al cargar usuarios desde el archivo");
+
         }
     }
     public void iniciarSesion(){
@@ -43,28 +46,35 @@ public class Acceso {
             System.out.println("Ingrese su contraseña: ");
             String contraseña = input.nextLine();
 
-            for (Usuario usuario:usuarios) {
-                if (usuario.getCodigo().equals(codIngresado)&& usuario.getContraseña().equals(contraseña)){
-                    System.out.println("Sesión inciada.... \n!BIENVENIDO!");
-                    sesionIniciada= true;
-                    break;
-                }
-            }
 
-            if (!sesionIniciada){
-                intentos++;
-                int intentosRest = intentosMAX-intentos;
-                if (intentosRest > 0){
-                    System.out.println("Contraseña y/o usuario incorrectos. Intentos restantes: "+ intentosRest);
-
-                }else {
-                    System.out.println("Ha alcanzado los intentos máximos.\n Bloqueando el acceso...");
-                    System.exit(0);
-                    return;
-
+            try{
+                for (Usuario usuario:usuarios) {
+                    if (usuario.getCodigo().equals(codIngresado)&& usuario.getContraseña().equals(contraseña)){
+                        System.out.println("Sesión inciada.... \n!BIENVENIDO!");
+                        sesionIniciada= true;
+                        break;
+                    }
                 }
 
+                if (!sesionIniciada){
+                    intentos++;
+                    int intentosRest = intentosMAX-intentos;
+                    if (intentosRest > 0){
+                        System.out.println("Contraseña y/o usuario incorrectos. Intentos restantes: "+ intentosRest);
+
+                    }else {
+                        System.out.println("Ha alcanzado los intentos máximos.\n Bloqueando el acceso...");
+                        System.exit(0);
+                        return;
+
+                    }
+
+                }
+            }catch (Exception e){
+                //LoggerUtil.logException(getCodIngresado(),e);
+
             }
+
         }
 
     }
